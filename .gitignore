@@ -14,6 +14,10 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
+# NetBeans
+**/build/
+build/
+
 # Windows shortcuts
 *.lnk
 
