@@ -17,6 +17,7 @@ $RECYCLE.BIN/
 # NetBeans
 **/build/
 build/
+dist/
 
 # Windows shortcuts
 *.lnk
