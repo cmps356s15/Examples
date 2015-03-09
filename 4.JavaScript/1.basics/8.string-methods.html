@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Strings - Methods</title>
+    </head>
+    <body>
+        <p>Best way ti try these methods using Chrome JavaScript console</p>
+        <script>
+            function writeLn(result) {
+                document.writeln(result);
+                document.writeln('<br>');
+            }
+            var sentence = "Sample sentence to show string methods";
+
+            writeLn(sentence);
+            writeLn("length = " + sentence.length);
+
+            writeLn("sentence[5] = " + sentence[5]);
+            writeLn("sentence.charAt(5) = " + sentence.charAt(5));
+
+            writeLn("'" + sentence + "'.indexOf('string') = " + sentence.indexOf("string"));
+            writeLn("'" + sentence + "'.indexOf('string',8) = " + sentence.indexOf("string", 8));
+            writeLn("'" + sentence + "'.indexOf('string',23) = " + sentence.indexOf("string", 40));
+
+            writeLn("'" + sentence + "'.substring(3,5) = '" + sentence.substring(3, 5) + "'");
+
+            var str = "                  ala bala portokalq                ";
+
+            writeLn("trimming whitespace");
+            writeLn("original: !" + str + "!");
+
+            writeLn("trim: !" + str.trim() + "!");
+            writeLn("trimLeft: !" + str.trimLeft() + "!");
+            writeLn("trimRight:!" + str.trimRight() + "!");
+
+            var string = "Sample string";
+            writeLn("original: \"" + string + "\"");
+
+            writeLn("padLeft(30) ->   \"" + string.padLeft(30).htmlEscape() + "\"");
+            writeLn("padRight(30) ->  \"" + string.padRight(30).htmlEscape() + "\"");
+            writeLn("padLeft(30) ->   \"" + string.padLeft(30, "-") + "\"");
+            writeLn("padRight(30) ->  \"" + string.padRight(30, "-").htmlEscape() + "\"");
+
+        </script>
+    </body>
+</html>
