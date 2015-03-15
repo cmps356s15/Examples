@@ -4,42 +4,30 @@
         <title>Strings - Methods</title>
     </head>
     <body>
-        <p>Best way ti try these methods using Chrome JavaScript console</p>
+        <p>See results in the console</p>
         <script>
-            function writeLn(result) {
-                document.writeln(result);
-                document.writeln('<br>');
-            }
             var sentence = "Sample sentence to show string methods";
 
-            writeLn(sentence);
-            writeLn("length = " + sentence.length);
+            console.log(sentence);
+            console.log("length = " + sentence.length);
 
-            writeLn("sentence[5] = " + sentence[5]);
-            writeLn("sentence.charAt(5) = " + sentence.charAt(5));
+            console.log("sentence[5] = " + sentence[5]);
+            console.log("sentence.charAt(5) = " + sentence.charAt(5));
 
-            writeLn("'" + sentence + "'.indexOf('string') = " + sentence.indexOf("string"));
-            writeLn("'" + sentence + "'.indexOf('string',8) = " + sentence.indexOf("string", 8));
-            writeLn("'" + sentence + "'.indexOf('string',23) = " + sentence.indexOf("string", 40));
+            console.log("'" + sentence + "'.indexOf('string') = " + sentence.indexOf("string"));
+            console.log("'" + sentence + "'.indexOf('string',8) = " + sentence.indexOf("string", 8));
+            console.log("'" + sentence + "'.indexOf('string',23) = " + sentence.indexOf("string", 40));
 
-            writeLn("'" + sentence + "'.substring(3,5) = '" + sentence.substring(3, 5) + "'");
+            console.log("'" + sentence + "'.substring(3,5) = '" + sentence.substring(3, 5) + "'");
 
             var str = "                  There is elegance in simplicity                ";
 
-            writeLn("trimming whitespace");
-            writeLn("original: <pre>!" + str + "!</pre>");
+            console.log("trimming whitespace");
+            console.log("original: !" + str + "!");
 
-            writeLn("trim: !" + str.trim() + "!");
-            writeLn("trimLeft: !" + str.trimLeft() + "!");
-            writeLn("trimRight:!" + str.trimRight() + "!");
-
-            var string = "Sample string";
-            writeLn("original: \"" + string + "\"");
-
-            writeLn("padLeft(30) ->   \"" + string.padLeft(30).htmlEscape() + "\"");
-            writeLn("padRight(30) ->  \"" + string.padRight(30).htmlEscape() + "\"");
-            writeLn("padLeft(30) ->   \"" + string.padLeft(30, "-") + "\"");
-            writeLn("padRight(30) ->  \"" + string.padRight(30, "-").htmlEscape() + "\"");
+            console.log("trim: !" + str.trim() + "!");
+            console.log("trimLeft: !" + str.trimLeft() + "!");
+            console.log("trimRight: !" + str.trimRight() + "!");
 
         </script>
     </body>

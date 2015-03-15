@@ -2,39 +2,36 @@
 
 <head>
 	<title>Data types and variables - Floating-point types</title>
-	<link href="styles/js-console.css" rel="stylesheet" />
 </head>
 
 <body>
-	<div id="js-console"></div>
-	<script src="scripts/js-console.js"></script>
 	<script>
 		var PI = Math.PI; // 3.141592653589793
-		jsConsole.writeLine("PI = " + PI);
+		console.log("PI = " + PI);
 		var minValue = Number.MIN_VALUE;
-		jsConsole.writeLine("Number.MIN_VALUE = " + minValue);
+		console.log("Number.MIN_VALUE = " + minValue);
 		var maxValue = Number.MAX_VALUE;
-		jsConsole.writeLine("Number.MAX_VALUE = " + maxValue);
+		console.log("Number.MAX_VALUE = " + maxValue);
 		var div0 = PI / 0; // Infinity
-		jsConsole.writeLine("PI / 0 = " + div0);
+		console.log("PI / 0 = " + div0);
 		var divMinus0 = -PI / 0; // -Infinity
-		jsConsole.writeLine("-PI / 0 = " + divMinus0);
+		console.log("-PI / 0 = " + divMinus0);
 		var unknown = div0 / divMinus0; // NaN
-		jsConsole.writeLine("Infinity / -Infinity = " + unknown);
+		console.log("Infinity / -Infinity = " + unknown);
 		var eps = Number.EPSILON;
-		jsConsole.writeLine("Number.EPSILON = " + eps);
+		console.log("Number.EPSILON = " + eps);
 
-		jsConsole.writeLine("");
+		console.log("");
 
 		var a = 0.1;
 		var b = 0.2;
 		var sum = 0.3;
 		var equal = (a + b == sum); // false
-		jsConsole.writeLine("a = " + a);
-		jsConsole.writeLine("b = " + b);
-		jsConsole.writeLine("a+b = " + (a + b));
-		jsConsole.writeLine("sum = " + sum);
-		jsConsole.writeLine("sum == a+b? is " + equal);
+		console.log("a = " + a);
+		console.log("b = " + b);
+		console.log("a+b = " + (a + b));
+		console.log("sum = " + sum);
+		console.log("sum == a+b? is " + equal);
 	</script>
 </body>
 

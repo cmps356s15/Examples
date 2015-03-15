@@ -10,4 +10,4 @@ function printMsg(msg){
   console.log(msg);
 }
 
-printMsg(max([1,2,3,4,45,5,6,]));
+printMsg(max([1,2,3,4,45,5,6]));

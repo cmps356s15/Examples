@@ -2,6 +2,15 @@
 <html>
     <head>
         <title>Calculator</title>
+        <style>
+            #operation {
+                width: 40px
+            }
+           .mainPage {
+                text-align: center;
+            }
+        </style>
+
         <script src="js/Calculator.js"></script>
         <script>
             function computeResult() {
@@ -33,17 +42,18 @@
         </script>
     </head>
     <body>
-        <div style="text-align: center;">
+        <div class="mainPage">
             <h1>Calculator</h1>
-            <form action="calculator">
-                <input type="text" id="num1" name="num1" required />
-                <select style="width: 40px" id="operation" name="operation">
+            <form>
+                <input type="text" id="num1"  required />
+                <select id="operation" >
                     <option>+</option>
                     <option>-</option>
                     <option>*</option>
                     <option>/</option>
                 </select>
-                <input type="text" id="num2" name="num2" required/>
+                <input type="text" id="num2" required/>
+                <a href="#" onclick="computeResult()">Compute</a> <br>
                 <input type="button" value="Compute" onclick="computeResult()"/>
                 <div id="result"></div>
             </form>
