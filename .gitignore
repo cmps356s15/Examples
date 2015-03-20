@@ -46,3 +46,6 @@ dist/
 Network Trash Folder
 Temporary Items
 .apdisk
+/CustomerMvcApp/nbproject/private/
+/ContactMvcApp/nbproject/private/
+/05.CmsMvcApp/nbproject/private/
