@@ -18,6 +18,7 @@ $RECYCLE.BIN/
 build/
 dist/
 .idea/
+private/
 
 # Windows shortcuts
 *.lnk
