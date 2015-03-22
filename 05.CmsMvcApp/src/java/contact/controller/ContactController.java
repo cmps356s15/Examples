@@ -25,10 +25,10 @@ public class ContactController extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Contact> customers = contactRespository.getContacts();
+        List<Contact> contacts = contactRespository.getContacts();
 
         
-        request.setAttribute("contactList", customers);
+        request.setAttribute("contactList", contacts);
 
         //Forward to the jsp page for rendering
         request.getRequestDispatcher("contact.jsp").forward(request, response);

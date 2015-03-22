@@ -19,13 +19,13 @@
         <table id="contactListTable">
             <thead>
                 <tr>
-                    <th bgcolor=>ID</th>
-                    <th bgcolor=>First Name</th>
-                    <th bgcolor=>Last Name</th>
-                    <th bgcolor=>Phone</th>
-                    <th bgcolor=>Mobile</th>
-                    <th bgcolor=>Email</th>
-                    <th bgcolor=>Address</th>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Address</th>
                     <th colspan="2"></th>
                 </tr>
             </thead>

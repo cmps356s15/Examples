@@ -1,8 +1,6 @@
 package contact.repository;
 
 import com.google.gson.Gson;
-import com.sun.javafx.scene.control.skin.VirtualFlow;
-import contact.entity.Address;
 import contact.entity.Contact;
 import java.util.List;
 import java.util.ArrayList;
