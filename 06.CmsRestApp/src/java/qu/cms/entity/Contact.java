@@ -1,5 +1,8 @@
-package contact.entity;
+package qu.cms.entity;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Contact {
     private int id;
     private String firstName;

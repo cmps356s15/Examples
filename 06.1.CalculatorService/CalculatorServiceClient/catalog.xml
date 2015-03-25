@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/CalculatorApp/CalculatorWSService?wsdl" uri="src/conf/xml-resources/web-service-references/CalculatorWSService/wsdl/CalculatorWSService.wsdl"/>
+    <system systemId="http://localhost:8080/CalculatorApp/CalculatorWSService?xsd=1" uri="src/conf/xml-resources/web-service-references/CalculatorWSService/wsdl/CalculatorWSService.xsd_1.xsd"/>
+    <system systemId="http://aePad:8080/CalculatorApp/CalculatorWSService?wsdl" uri="src/conf/xml-resources/web-service-references/CalculatorWSService_1/wsdl/aePad_8080/CalculatorApp/CalculatorWSService.wsdl"/>
+    <system systemId="http://aePad:8080/CalculatorApp/CalculatorWSService?xsd=1" uri="src/conf/xml-resources/web-service-references/CalculatorWSService_1/wsdl/aePad_8080/CalculatorApp/CalculatorWSService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/calculator/CalculatorWSService?wsdl" uri="src/conf/xml-resources/web-service-references/CalculatorWSService/wsdl/localhost_8080/calculator/CalculatorWSService.wsdl"/>
+    <system systemId="http://localhost:8080/calculator/CalculatorWSService?xsd=1" uri="src/conf/xml-resources/web-service-references/CalculatorWSService/wsdl/localhost_8080/calculator/CalculatorWSService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/calculator/CalculatorService?wsdl" uri="src/conf/xml-resources/web-service-references/CalculatorService/wsdl/localhost_8080/calculator/CalculatorService.wsdl"/>
+    <system systemId="http://localhost:8080/calculator/CalculatorService?xsd=1" uri="src/conf/xml-resources/web-service-references/CalculatorService/wsdl/localhost_8080/calculator/CalculatorService.xsd_1.xsd"/>
+</catalog>
