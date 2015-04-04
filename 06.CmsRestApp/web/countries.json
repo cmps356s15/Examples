@@ -1,0 +1,81 @@
+{
+"countries":
+        [
+            {
+                "name": "Qatar",
+                "code": "QA"
+            },
+            {
+                "name": "Palestine",
+                "code": "PS"
+            },
+            {
+                "name": "Algeria",
+                "code": "DZ"
+            },
+            {
+                "name": "Egypt",
+                "code": "EG"
+            },
+            {
+                "name": "Sudan",
+                "code": "SD"
+            },
+            {
+                "name": "Iraq",
+                "code": "IQ"
+            },
+            {
+                "name": "Morocco",
+                "code": "MA"
+            },
+            {
+                "name": "Saudi Arabia",
+                "code": "SA"
+            },
+            {
+                "name": "Yemen",
+                "code": "YE"
+            },
+            {
+                "name": "Syria",
+                "code": "SY"
+            },
+            {
+                "name": "Tunisia",
+                "code": "TN"
+            },
+            {
+                "name": "Somalia",
+                "code": "SO"
+            },
+            {
+                "name": "United Arab Emirates",
+                "code": "AE"
+            },
+            {
+                "name": "Libya",
+                "code": "LY"
+            },
+            {
+                "name": "Jordan",
+                "code": "JO"
+            },
+            {
+                "name": "Mauritania",
+                "code": "MR"
+            },
+            {
+                "name": "Oman",
+                "code": "OM"
+            },
+            {
+                "name": "Kuwait",
+                "code": "KW"
+            },
+            {
+                "name": "Bahrain",
+                "code": "BH"
+            }
+        ]
+}

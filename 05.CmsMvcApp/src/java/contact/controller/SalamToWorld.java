@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//@WebServlet("/salam")
 @WebServlet(urlPatterns = {"/salam", "/tahiya", "/سلام"})
 public class SalamToWorld extends HttpServlet {
 

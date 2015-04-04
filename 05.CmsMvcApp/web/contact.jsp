@@ -42,7 +42,7 @@
                             ${contact.address.city} <br/>
                             ${contact.address.country}  <br/>
                         </td>
-                        <td><a href="updatecontact?id=${contact.id}">Edit</a></td>
+                        <td><a href="updatecontact?id=${contact.id}">Update</a></td>
                         <td><a href="deletecontact?id=${contact.id}" onclick="return confirm('Do you really want to delete this contact?');">Delete</a></td>
                     </tr>
                 </c:forEach>

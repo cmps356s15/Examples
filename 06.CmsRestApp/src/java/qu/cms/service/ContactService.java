@@ -22,40 +22,22 @@ import qu.cms.repository.ContactRepository;
 import qu.cms.repository.IContactRepository;
 
 @Path("/contacts")
-@Stateless
 public class ContactService {
 
     @Inject
     IContactRepository contactRepository;
-
-//    @GET
-//    @Path("/all")
-//    @Template("index.foo")
-//    public Viewable home() {
-//        return new Viewable("index.foo", "FOO");
-//    }
     
-    @GET
-    @Path("countries")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getCountries() {
-        List<String> countries = contactRepository.getCountries();
-        String json = (new Gson()).toJson(countries);
-        System.out.println(json);
-        return Response.ok(json).build();
-    }
-
     @GET
     @Path("cities/{country}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCities(@PathParam("country") String country) {
-        System.out.println("ContactService.getCities(coutry) :" + country);
+    public Response getCities(@PathParam("country") String countryCode) {
+        System.out.println("ContactService.getCities(coutryCode) :" + countryCode);
         try {
             Thread.sleep(400);//simulate a long running action
         } catch (Exception ex) {
             Logger.getLogger(ContactRepository.class.getName()).log(Level.SEVERE, "Thread sleep failed", ex);
         }
-        List<String> cities = contactRepository.getCities(country);
+        List<String> cities = contactRepository.getCities(countryCode);
         System.out.println("cities count " + cities.size());
         Gson gson = new Gson();
         String json = gson.toJson(cities);

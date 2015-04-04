@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contacts</title>
+        <link rel="stylesheet" href="css/styles.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+        <script src="js/contact.js"></script>
+
+    </head>
+    <body>
+
+    <template id='contact-template'>
+        {{#each .}}
+            <tr>
+                <td>{{id}}</td> 
+                <td>{{firstName}}</td>
+                <td>{{lastName}}</td> 
+                <td>{{phone}}</td>
+                <td>{{mobile}}</td> 
+                <td>{{email}}</td> 
+                <td>{{address/street}} <br/>
+                    {{address/city}} <br/>
+                    {{address/country}}  <br/>
+                </td>
+                <td><a href="updatecontact.html?id={{id}}">Update</a></td>
+                <td><a href="#" data-id="{{id}}" class="deleteLink">Delete</a></td>
+            </tr>
+        {{/each}}
+    </template>
+
+    <div id='menuu'>
+        <a href="contacts.html">Contacts</a>&nbsp;&nbsp;&nbsp;
+        <a href="addcontact.html">Add Contact</a> 
+    </div>
+
+    <h3>Contacts</h3>
+
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+</html>

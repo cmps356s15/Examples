@@ -60,6 +60,7 @@ public class AddContactController extends HttpServlet {
 
             //Store a confirmation message
             request.getSession().setAttribute("message", String.format("Contact with Id %s was added.", contact.getId()));
+            //request.getRequestDispatcher("contacts").forward(request, response);
             response.sendRedirect("contacts");
         } catch (Exception ex) {
             ex.printStackTrace(response.getWriter());

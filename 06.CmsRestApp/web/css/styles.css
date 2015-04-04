@@ -1,0 +1,40 @@
+body {
+    margin: 10px;
+}
+label {
+    width: 120px;
+}
+
+label {
+    display: block;
+    clear: both;
+}
+
+input[type='text'], select {
+    margin-bottom: 8px;
+    width: 200px;
+}
+
+table, th, td {
+   border: 1px solid lightskyblue;
+}
+
+th { background: lightcyan }
+
+table {
+    border-collapse: collapse;
+}
+
+/*table {
+	margin-left: auto;
+	margin-right: auto;
+}*/
+
+tbody tr:nth-child(odd) {
+   background-color: lightyellow;
+}
+
+.message {
+	color: blue;
+	background-color: LightYellow;
+}

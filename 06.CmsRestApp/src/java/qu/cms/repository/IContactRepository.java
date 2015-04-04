@@ -10,7 +10,7 @@ public interface IContactRepository {
 
     void deleteContact(int contactId);
 
-    List<String> getCities(String country);
+    List<String> getCities(String countryCode);
 
     Contact getContact(int id);
 
@@ -18,11 +18,9 @@ public interface IContactRepository {
 
     int getContactsCount();
 
-    List<String> getCountries();
-
     @PostConstruct
     void insertTestData();
 
     void updateContact(Contact contact);
-    
+ 
 }

@@ -30,7 +30,8 @@ public class Hala extends HttpServlet {
         }
         
         //Set the number of previous visits
-        Cookie accessCountCookie = new Cookie("accessCount", String.valueOf(count + 1));
+        Cookie accessCountCookie = 
+                new Cookie("accessCount", String.valueOf(count + 1));
         accessCountCookie.setMaxAge(60 * 60 * 24 * 365); // 1 year
         response.addCookie(accessCountCookie);
 

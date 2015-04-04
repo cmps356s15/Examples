@@ -19,20 +19,26 @@ public class ContactController extends HttpServlet {
     @Inject
     ContactRespository contactRespository;
 
+        @Override
+    protected void doPost(HttpServletRequest request, 
+            HttpServletResponse response)
+            throws ServletException, IOException {
+            doGet(request, response);
+    }
+    
     //<editor-fold defaultstate="collapsed" desc="doGet">
     @Override
     protected void doGet(HttpServletRequest request, 
             HttpServletResponse response)
             throws ServletException, IOException {
-
-        List<Contact> contacts = contactRespository.getContacts();
-
         
+        List<Contact> contacts = contactRespository.getContacts();
         request.setAttribute("contactList", contacts);
 
-        //Forward to the jsp page for rendering
+        //Forward to view
         request.getRequestDispatcher("contact.jsp").forward(request, response);
     }
 
+    
     //</editor-fold>
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Arab Cities</title>
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+        <script src="js/city.js"></script>
+    </head>
+
+    <body>
+    <template id="country-template">
+        <option value=""></option>
+        {{#each countries}}
+            <option value="{{code}}"> {{name}} </option>
+        {{/each}}
+    </template>
+
+    <template id="city-template">
+        <h3>Cities:</h3>
+        <ul>
+            {{#each .}}
+                <li> {{.}} </li>
+            {{/each}}
+        </ul>
+    </template>
+
+    <fieldset>
+        Select a Country:
+        <select id="country">
+        </select> 
+    </fieldset>        
+    <div id='loading' style="display: none;">
+        <img src="images/ajax-loading.gif" />
+    </div>
+    
+    <div id="city"></div>
+
+</body>
+</html>

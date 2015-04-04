@@ -85,90 +85,65 @@ public class ContactRepository implements IContactRepository {
         //System.out.println(gson.toJson(contacts));
        */
     }
-
-    public List<String> getCountries() {
-        List<String> countries = new ArrayList();
-        countries.add("Qatar");
-        countries.add("Palestine");
-        countries.add("Algeria");
-        countries.add("Egypt");
-        countries.add("Sudan");
-        countries.add("Iraq");
-        countries.add("Morocco");
-        countries.add("Saudi");
-        countries.add("Yemen");
-        countries.add("Syria");
-        countries.add("Tunisia");
-        countries.add("Somalia");
-        countries.add("UAE");
-        countries.add("Libya");
-        countries.add("Jordan");
-        countries.add("Mauritania");
-        countries.add("Oman");
-        countries.add("Kuwait");
-        countries.add("Bahrain");
-
-        return countries;
-    }
-
-    public List<String> getCities(String country) {
+  
+    public List<String> getCities(String countryCode) {
         List<String> cities = new ArrayList();
-        switch (country.toLowerCase()) {
-            case "qatar":
+        switch (countryCode.toUpperCase()) {
+            case "QA":
                 cities = Arrays.asList("Doha", "Al Khor", "Al Wakrah");
                 break;
-            case "palestine":
+            case "PS":
                 cities = Arrays.asList("Quds", "Gaza", "Khan Yunis");
                 break;
-            case "algeria":
+            case "DZ":
                 cities = Arrays.asList("Algiers", "Oran", "Constantine");
                 break;
-            case "egypt":
+            case "EG":
                 cities = Arrays.asList("Cairo", "Alexandria", "Damanhur");
                 break;
-            case "sudan":
+            case "SD":
                 cities = Arrays.asList("Khartoum", "Wadi Halfa", "Taiyara");
                 break;
-            case "iraq":
+            case "IQ":
                 cities = Arrays.asList("Baghdad", "Basra", "Faluja");
                 break;
-            case "morocco":
+            case "MA":
                 cities = Arrays.asList("Fes", "Casabalanca", "Rabat");
                 break;
-            case "saudi":
+            case "SA":
                 cities = Arrays.asList("Mecca", "Madina", "Jeddah");
                 break;
-            case "yemen":
+            case "YE":
                 cities = Arrays.asList("Sana'a", "Aden", "Taizz");
                 break;
-            case "syria":
+            case "SY":
                 cities = Arrays.asList("Damascus", "Aleppo", "Daraa");
                 break;
-            case "tunisia":
+            case "TN":
                 cities = Arrays.asList("Tunis", "Sfax", "Soussa");
                 break;
-            case "somalia":
+            case "SO":
                 cities = Arrays.asList("Mogadishu", "Merca", "Qandala");
                 break;
-            case "uae":
+            case "AE":
                 cities = Arrays.asList("Dubai", "Abu Dhabi", "Sharjha");
                 break;
-            case "libya":
+            case "LY":
                 cities = Arrays.asList("Tripoli", "Benghazi", "Misrata");
                 break;
-            case "jordan":
+            case "JO":
                 cities = Arrays.asList("Amman", "Irbid", "Al-Aqaba");
                 break;
-            case "mauritania":
+            case "MR":
                 cities = Arrays.asList("Nouakchott", "Nouadhibou", "Rosso");
                 break;
-            case "oman":
+            case "OM":
                 cities = Arrays.asList("Muscat", "Nizwa", "Sohar");
                 break;
-            case "kuwait":
+            case "KW":
                 cities = Arrays.asList("Kuwait city", "Ahmed Al Jaber", "Al Abdaliyah");
                 break;
-            case "bahrain":
+            case "BH":
                 cities = Arrays.asList("Manama", "Riffa", "Muharraq");
                 break;
         }
