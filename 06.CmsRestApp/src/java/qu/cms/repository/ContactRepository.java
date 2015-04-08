@@ -50,7 +50,11 @@ public class ContactRepository implements IContactRepository {
         if (contacts == null) {
             insertTestData();
         }
+        try  {
         return contacts.stream().filter(c -> c.getId() == id).findFirst().get();
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     public int getContactsCount() {

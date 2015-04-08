@@ -46,7 +46,12 @@ public class ContactRespository {
     }
 
     public Contact getContact(int id) {
-        return contacts.stream().filter(c -> c.getId() == id).findFirst().get();
+        for (int i = 0; i < contacts.size(); i++) {
+            if (contacts.get(i).getId() == id) {
+               return contacts.get(i);
+            }
+        }
+        return null;
     }
 
     private void insertTestData() {

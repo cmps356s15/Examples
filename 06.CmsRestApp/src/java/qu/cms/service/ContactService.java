@@ -22,6 +22,7 @@ import qu.cms.repository.ContactRepository;
 import qu.cms.repository.IContactRepository;
 
 @Path("/contacts")
+@Stateless
 public class ContactService {
 
     @Inject
@@ -84,7 +85,7 @@ public class ContactService {
     public Response addContact(Contact contact) {
         try {
             contact = contactRepository.addContact(contact);
-            String location = String.format("/contacts/%s", contact.getId());
+            String location = String.format("/cmsapp/api/contacts/%s", contact.getId());
             String msg = String.format("contact #%s created successfully", contact.getId());
             return Response.created(new URI(location)).entity(msg).build();
         } catch (Exception ex) {
