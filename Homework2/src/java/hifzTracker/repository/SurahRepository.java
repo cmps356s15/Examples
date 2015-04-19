@@ -40,5 +40,7 @@ public class SurahRepository {
 
         Surah[] surahArray = gson.fromJson(surahsStr, Surah[].class);
         surahs = new ArrayList<>(Arrays.asList(surahArray));
+        
+        surahs.addAll(surahs);
     }
 }
