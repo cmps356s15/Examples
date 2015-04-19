@@ -1,0 +1,79 @@
+body {
+    margin: 10px;
+}
+
+.header {
+    display:table;
+}
+
+    .header img {
+        width:80px; height:80px;
+    }
+
+    .header h1 {
+        vertical-align:middle; display:table-cell; padding-left:20px
+    }
+
+    .header span {
+        vertical-align:middle; display:table-cell; width:70%; text-align:right
+    }
+
+label {
+    width: 130px;
+}
+
+label {
+    display: block;
+    clear: both;
+}
+
+input[type='text'], input[type='date'], input[type='password'], input[type='range'], select {
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+input[type='date'] {
+    margin-bottom: 10px;
+    width: 120px;
+}
+
+textarea {
+    width: 450px; 
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+table, th, td {
+    border: 1px solid lightskyblue;
+    padding: 4px;
+}
+
+th {
+    background: lightcyan;
+}
+
+table {
+    border-collapse: collapse;
+}
+tbody tr:nth-child(odd) {
+    background-color: lightyellow;
+}
+
+.message {
+    color: blue;
+    background-color: LightYellow;
+}
+
+nav {
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    font-size: 12pt;
+}
+
+nav ul li {
+    display: inline;
+    margin-left: 10px;
+}

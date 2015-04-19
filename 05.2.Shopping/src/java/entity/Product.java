@@ -4,6 +4,14 @@ public class Product {
     int id;
     String name;
     int price;
+    String category;
+
+    public Product(int id, String name, int price, String category) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.category = category;
+    }
 
     public int getId() {
         return id;
@@ -29,9 +37,13 @@ public class Product {
         this.price = price;
     }
 
-    public Product(int id, String name, int price) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
+    public String getCategory() {
+        return category;
     }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    
 }
