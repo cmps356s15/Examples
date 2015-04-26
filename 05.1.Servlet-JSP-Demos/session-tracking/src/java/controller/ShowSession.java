@@ -53,3 +53,54 @@ public class ShowSession extends HttpServlet {
         request.getRequestDispatcher("sessioninfo.jsp").forward(request, response);
     }
 }
+
+/*
+package qu.ls.controller;
+
+import java.io.*;
+import java.util.List;
+import javax.inject.Inject;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+import qu.ls.entity.Book;
+import qu.ls.entity.Borrower;
+import qu.ls.entity.Loan;
+import qu.ls.repository.LoanRepository;
+
+@WebServlet("/loan")
+public class LoanController extends HttpServlet {
+
+    @Inject
+    public LoanRepository loanRepository;
+
+    @Override
+    public void doGet(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
+
+        List<Book> books = loanRepository.getBooks();
+        List<Borrower> borrowers = loanRepository.getBorrowers();
+        List<Loan> loans = loanRepository.getLoans();
+
+        PrintWriter pr = response.getWriter();
+
+        for (Book book : books) {
+            pr.println(book.getIsbn());
+        }
+
+        for (Borrower book : borrowers) {
+            pr.println(book.getFirstName());
+        }
+        for (Loan book : loans) {
+            pr.println(book.getBook().getIsbn());
+            pr.println(book.getBorrower().getLastName());
+            pr.println(book.getDueDate());
+        }
+        
+        pr.println(loanRepository.getBook("123").getTitle());
+        pr.println(loanRepository.getBorrower(1).getFirstName());
+    }
+}
+
+*/
