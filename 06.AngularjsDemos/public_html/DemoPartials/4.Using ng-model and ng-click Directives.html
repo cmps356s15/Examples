@@ -1,0 +1,31 @@
+﻿<div class="container" ng-controller="SimpleController">
+    <h3>Filtering Data using "filter"</h3>
+    Name:<br />
+    <input type="text" ng-model="inputData.name" placeholder="name" />
+    <br />
+    City:<br />
+    <input type="text" ng-model="inputData.city" placeholder="city" />
+    <br />
+    <button class="btn btn-primary" ng-click="addCustomer()">Add Customer</button>
+    <br />
+    <br />
+
+    <ul>
+        <li ng-repeat="customer in customers">{{ customer.name }}</li>
+    </ul>
+</div>
+
+<script>
+    function SimpleController($scope) {
+        $scope.customers = [
+	    { name: 'Ali Baba', city: 'Doha' },
+            { name: 'Abbas Ibn Firnas', city: 'Baghdad' },
+            { name: 'Samir Saghir', city: 'Dubai' },
+            { name: 'Fatima Batouta', city: 'Fes' }
+        ];
+
+        $scope.addCustomer = function () {
+            $scope.customers.push({ name: $scope.inputData.name, city: $scope.inputData.city });
+        };
+    }
+</script>

@@ -4,6 +4,7 @@ build/
 dist/
 .idea/
 private/
+oldExamples/
 
 # Windows image file caches
 Thumbs.db

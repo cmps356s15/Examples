@@ -1,0 +1,57 @@
+<html ng-app="friendApp">
+    <head>
+        <title>Simple Controller</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script>
+            //Add Friends using JavaScript
+            function addJsFriends() {
+                var friends = ['Ahmed', 'Fatima', 'Mosa', 'Saleh'];
+                var friendsHtml = '<ul>';
+                for (var i in friends) {
+                    friendsHtml += '<li>' + friends[i] + '</li>';
+                }
+                friendsHtml += '</ul>';
+                console.log("from addJsFriends: " + friendsHtml);
+                document.getElementById("jsFriends").innerHTML = friendsHtml;
+            }
+            
+            //Using jQuery
+            $(document).ready(function (){
+               var friends = ['Ahmed', 'Fatima', 'Mosa', 'Saleh'];
+               // Iterates through the array
+               var list = $('<ul>');
+               $.each(friends, function (index, item) { 
+                    var listItem = $('<li>').text(item);
+                    list.append(listItem);
+               });
+               console.log("from jQuery: " + list.html());
+               $('#jQuery').html(list);
+            });
+            
+            //Using Angularjs
+            var friendModule = angular.module('friendApp', []);
+            friendModule.controller('frController', friendController);
+            
+            function friendController ($scope) {
+                var friends = ['Ahmed', 'Fatima', 'Mosa', 'Saleh'];
+                $scope.names = friends;
+            }
+        </script>
+    </head>
+    <body onload="addJsFriends()">
+        
+        <h3>My best friends: - Using JavaScript</h3>
+        <div id="jsFriends"></div>
+        
+        <h3>My best friends: - Using jQuery</h3>
+        <div id="jQuery"></div>
+        
+        <h3>My best friends: - Using angularjs</h3>
+        <ul ng-controller="frController">
+            <li ng-repeat="name in names">{{name}}</li>
+        </ul>
+       
+    </body>
+</html>

@@ -1,0 +1,22 @@
+<h3>
+    Arab Cities
+</h3>
+
+<fieldset>
+    <label for="country">Country:</label> 
+    <select id="country" ng-model="country" ng-change="fillCityDropdown(country)">
+        <option value=""></option>
+        <option ng-repeat="country in countries" value="{{country.code}}"> {{country.name}} </option>
+    </select> 
+
+
+    <br><br>
+    <label for="city">City:</label> 
+    <select id="city" ng-model="city">
+        <option value=""></option>
+        <option ng-repeat="city in cities" value="{{city}}"> {{city}} </option>
+    </select>
+    <img ng-show="loading" src="/cms/img/ajax-loader.gif" alt="Please wait...">
+    
+    <br><br>Selected city: {{city}}
+</fieldset>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="customerApp">
+    <head>
+        <title>Customer Controller</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script>
+            //$scope.customers = JSON.parse(localStorage.getItem('customers'));
+            //localStorage.setItem('customers', JSON.stringify($scope.customers));
+            //if ($scope.customers === null) {
+            
+            var app = angular.module('customerApp', []);
+            app.controller('CustomerController', customerController);
+            
+            function customerController ($scope) {
+                 $scope.customer = {
+                         name: '',
+                         city: ''
+                 };
+
+                 $scope.customers = [
+                     { name: 'Ali Baba', city: 'Doha' },
+                     { name: 'Abbas Ibn Firnas', city: 'Baghdad' },
+                     { name: 'Samir Saghir', city: 'Dubai' },
+                     { name: 'Fatima Batouta', city: 'Fes' }
+                   ];
+
+                 $scope.addCustomer = function () {
+                     $scope.customers.push($scope.customer);
+                         $scope.customer = {
+                             name: '',
+                             city: ''
+                         };
+                 };
+            }
+        </script> 
+    </head>
+    <body>
+        ﻿<div class="container" ng-controller="CustomerController">
+            <h3>Filtering and Sorting Data using "filter"</h3>
+            Name:<br />
+            <input type="text" ng-model="customer.name" placeholder="name" />
+            <br />
+            City:<br />
+            <input type="text" ng-model="customer.city" placeholder="city" />
+            <br />
+            <button class="btn btn-primary" ng-click="addCustomer()">Add Customer</button>
+            <br />
+            <br />
+
+            <br />
+            <ul>
+                <li ng-repeat="customer in customers">
+                    {{ customer.name | uppercase }} - {{ customer.city}}
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
+
+    <!--Filter by Name:
+    <input type="text" ng-model="nameText" />
+    | filter:nameText track by $index | orderBy:'name'
+    -->

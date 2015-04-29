@@ -1,0 +1,18 @@
+<h3>
+    QU Students Statistics
+</h3>
+
+<table class="table table-striped" style="width: 200px">
+    <thead>
+        <tr>
+            <th>Gender</th>
+            <th>%</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="stat in stats">
+            <td>{{stat.gender}}</td>
+            <td>{{stat.percentage}}</td>
+        </tr>
+    </tbody>
+</table>
