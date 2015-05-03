@@ -12,22 +12,25 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.min.js"></script>
         <script>
             var myApp = angular.module('myApp', ['ngRoute']);
-            myApp.config(function($routeProvider) {
-                $routeProvider
-                    .when('/',
-                    {
-                        templateUrl: '/simpleRoutingexample/partials/about.html',
-                        controller: 'quController'
-                    })
-                    .when('/stats',
-                    {
-                         templateUrl: '/simpleRoutingexample/partials/stats.html',
-                         controller: 'statsController'
-                    })
-                    .otherwise({redirectTo: '/'});
-            });
+            myApp.config(routeConfig);
+                    
+            function routeConfig ($routeProvider) {
+                $routeProvider.when('/',
+                {
+                    templateUrl: '/simpleRoutingexample/partials/about.html',
+                    controller: 'quController'
+                });
+                    
+                $routeProvider.when('/stats',
+                {
+                     templateUrl: '/simpleRoutingexample/partials/stats.html',
+                     controller: 'statsController'
+                });
+                
+                $routeProvider.otherwise({redirectTo: '/'});
+            };
 
-            myApp.controller('quController', function($scope, $http) {
+            myApp.controller('quController', function($scope) {
                 $scope.address = {
                     street: 'University St',
                     city: 'Doha',
@@ -35,7 +38,7 @@
                 };
             });
 
-            myApp.controller('statsController', function($scope, $routeParams) {
+            myApp.controller('statsController', function($scope) {
                 $scope.stats = [
                     {gender:'Female', percentage: '70%'},
                     {gender: 'Male', percentage:'30%'}

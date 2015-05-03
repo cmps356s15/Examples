@@ -38,7 +38,6 @@ function CustomerController($scope) {
     };
 
     $scope.isInvalidCustomer = function() {
-        console.log($scope.customer.name, $scope.customer.city);
         return ($scope.customer.name.trim() === '' 
                 || $scope.customer.city.trim() === '');
     };
@@ -64,7 +63,7 @@ function CustomerController($scope) {
     //changes to customers will be auto saved to the localStorage
     $scope.$watch('customers', function(newValue, oldValue) {
         if (oldValue !== newValue) {
-            console.log(newValue, oldValue);
+            console.log(JSON.stringify(newValue));
             localStorage.setItem('customers', JSON.stringify(newValue));
         }
     }, true);

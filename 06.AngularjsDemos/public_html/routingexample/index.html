@@ -7,20 +7,21 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.min.js"></script>
         <script>
             var myApp = angular.module('myApp', ['ngRoute']);
-            myApp.config(function ($routeProvider) {
-                $routeProvider
-                        .when('/',
-                                {
-                                    templateUrl: '/routingexample/partials/directory.html',
-                                    controller: 'directoryController'
-                                })
-                        .when('/view/:id',
-                                {
-                                    templateUrl: '/routingexample/partials/view.html',
-                                    controller: 'viewController'
-                                })
-                        .otherwise({redirectTo: '/'});
-            });
+            myApp.config(routeConfig);
+            
+            function routeConfig($routeProvider) {
+                $routeProvider.when('/',
+                    {
+                        templateUrl: '/routingexample/partials/directory.html',
+                        controller: 'directoryController'
+                    });
+                $routeProvider.when('/view/:id',
+                    {
+                        templateUrl: '/routingexample/partials/view.html',
+                        controller: 'viewController'
+                    });
+                $routeProvider.otherwise({redirectTo: '/'});
+            };
 
             myApp.controller('directoryController', function ($scope, $http) {
                 $http.get('/routingexample/data.js').success(function (data) {

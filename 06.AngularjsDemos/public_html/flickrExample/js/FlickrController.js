@@ -1,6 +1,8 @@
 var myApp = angular.module('myApp', []);
 
-myApp.controller('FlickrController', function($scope, $http) {
+myApp.controller('FlickrController', FlickrController);
+
+function FlickrController($scope, $http) {
     $http({
             method: 'JSONP',
             url: 'http://api.flickr.com/services/feeds/photos_public.gne',
@@ -12,4 +14,4 @@ myApp.controller('FlickrController', function($scope, $http) {
         }).success(function(response) {
             $scope.photos = response;
     });
- });
+ };

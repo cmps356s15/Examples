@@ -46,7 +46,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="customer in customers | filter:searchText track by $index | orderBy:'name'">
+                    <tr ng-repeat="customer in customers | filter:searchText track by $index | orderBy:'city'">
                         <td>{{ customer.name}}</td>
                         <td>{{ customer.city}}</td>
                         <td><a ng-click='editCustomer($index)' class='btn btn-small btn-primary'>edit</a></td>

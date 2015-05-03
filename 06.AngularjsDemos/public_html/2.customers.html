@@ -13,11 +13,6 @@
             app.controller('CustomerController', customerController);
             
             function customerController ($scope) {
-                 $scope.customer = {
-                         name: '',
-                         city: ''
-                 };
-
                  $scope.customers = [
                      { name: 'Ali Baba', city: 'Doha' },
                      { name: 'Abbas Ibn Firnas', city: 'Baghdad' },
@@ -25,12 +20,16 @@
                      { name: 'Fatima Batouta', city: 'Fes' }
                    ];
 
+                 $scope.customer = {
+                         name: '',
+                         city: ''
+                 };
                  $scope.addCustomer = function () {
-                     $scope.customers.push($scope.customer);
-                         $scope.customer = {
-                             name: '',
-                             city: ''
-                         };
+                    $scope.customers.push($scope.customer);
+                    $scope.customer = {
+                        name: '',
+                        city: ''
+                    };
                  };
             }
         </script> 
@@ -49,9 +48,10 @@
             <br />
 
             <br />
+            <input type='text' ng-model='filterBy' />
             <ul>
-                <li ng-repeat="customer in customers">
-                    {{ customer.name | uppercase }} - {{ customer.city}}
+                <li ng-repeat="customer in customers | filter: filterBy | orderBy:'name'">
+                    {{ customer.name }} - {{ customer.city | uppercase }}
                 </li>
             </ul>
         </div>
@@ -59,6 +59,6 @@
 </html>
 
     <!--Filter by Name:
-    <input type="text" ng-model="nameText" />
+    <input type="text" ng-model="nameText" /> | uppercase
     | filter:nameText track by $index | orderBy:'name'
     -->
