@@ -21,7 +21,7 @@
     <div class="form-group">
         <label for='country'>Country:</label>
         <select id='country' name='country' ng-model="contact.address.country" required
-                ng-change="fillCityDropdown(contact.address.country)"
+                ng-change="fillCityDropdown(contact.address.country.code)"
                 ng-options="country.code as country.name for country in countries">
             <option value=""></option>
         </select>

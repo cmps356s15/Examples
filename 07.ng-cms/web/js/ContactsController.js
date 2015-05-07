@@ -1,13 +1,17 @@
-myApp.controller('ContactsController', function($scope, $http) {
+myApp.controller('ContactsController', function($rootScope, $scope, $http, $location) {
     $scope.loading = true;
-    
-    $http({
+      
+    var request = $http({
         method: 'GET',
         url: 'js/countries.json'
-    }).success(function(response) {
+    });
+    
+    request.success(function(response) {
         console.log(response);
         $scope.countries = response.countries;
-    }).error(function(response, status, headers, config) {
+    });
+    
+    request.error(function(response, status, headers, config) {
         console.log(response, status, config);
     });
 
@@ -16,7 +20,8 @@ myApp.controller('ContactsController', function($scope, $http) {
         var foundAt = $scope.contacts.indexOf('id', contactId);
         if (contactId >= 0) {
             $scope.contacts.splice(foundAt, 1);
-        }
+        };
+        $location.path("/");
     };
 
     Array.prototype.indexOf = function (property, value) {
@@ -29,15 +34,19 @@ myApp.controller('ContactsController', function($scope, $http) {
 
     $scope.getContacts = function() {
         $scope.alertMessage = null; //clear alertMessage
-        $http({
+        var request = $http({
             method: 'GET',
             dataType: "json",
             url: '/cms/api/contacts'
-        }).success(function(response) {
+        });
+        
+        request.success(function(response) {
             console.log(response);
             $scope.contacts = response;
             $scope.loading = false;
-        }).error(function(response, status, headers, config) {
+        });
+        
+        request.error(function(response, status, headers, config) {
             $scope.alertMessage = response;
             console.log(response, status, config);
             $scope.loading = false;
@@ -72,5 +81,9 @@ myApp.controller('ContactsController', function($scope, $http) {
     $scope.clearAlert = function() {
         $scope.alertMessage = null;
     };
-
+    
+    $scope.logout = function() {
+        delete $rootScope.loggedInUser;
+        $location.path("/login");
+    };
 });

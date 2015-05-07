@@ -47,17 +47,18 @@ public class ContactService {
     }
 
     //You can test it using Postman Chrome App - http://www.getpostman.com/
-    //Url: http://localhost:8080/cmsapp/api/contacts using Get request
+    //Url: http://localhost:8080/cms/api/contacts using Get request
     //you get either XML if accept="application/xml" or json if accept="application/json"
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     public Response getContacts() {
-        String json = (new Gson()).toJson(contactRepository.getContacts());
+        Gson gson = new Gson();
+        String json = gson.toJson(contactRepository.getContacts());
         return Response.ok(json).build();
     }
 
     //You can test it using Postman Chrome App - http://www.getpostman.com/
-    //Url: http://localhost:8080/cmsapp/api/contacts/1 using Get request
+    //Url: http://localhost:8080/cms/api/contacts/1 using Get request
     //you get either XML if accept="application/xml" or json if accept="application/json"
     @GET
     @Path("/{id}")
@@ -73,7 +74,7 @@ public class ContactService {
     }
 
     /*You can test it using Postman Chrome App - http://www.getpostman.com/
-     Url: http://localhost:8080/cmsapp/api/contacts using Post request
+     Url: http://localhost:8080/cms/api/contacts using Post request
      You can either post XML by setting the Content-Type="application/xml":
      <?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns2:contact xmlns:ns2="qu.cms.model"><firstName>Samir</firstName><lastName>Ali</lastName><address><street>15 Fun St</street><city>Doha</city><country>Qatar</country></address></ns2:contact>
      * 
@@ -85,8 +86,8 @@ public class ContactService {
     public Response addContact(Contact contact) {
         try {
             contact = contactRepository.addContact(contact);
-            String location = String.format("/cmsapp/api/contacts/%s", contact.getId());
-            String msg = String.format("contact #%s created successfully", contact.getId());
+            String location = String.format("/cms/api/contacts/%s", contact.getId());
+            String msg = String.format("contact #%d created successfully", contact.getId());
             return Response.created(new URI(location)).entity(msg).build();
         } catch (Exception ex) {
             String msg = String.format("Adding contact failed because : %s",
@@ -96,7 +97,7 @@ public class ContactService {
     }
 
     /*You can test it using Postman Chrome App - http://www.getpostman.com/
-     Url: http://localhost:8080/cmsapp/api/contacts using Put request
+     Url: http://localhost:8080/cms/api/contacts using Put request
      You can either post XML by setting the Content-Type="application/xml":
      <?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns2:contact xmlns:ns2="qu.cms.model"><contactId>2</contactId><firstName>Mariam</firstName><lastName>Ahmed</lastName><address><addressId>2</addressId><street>11 Fun St</street><city>Kuwait City</city><country>Kuwait</country></address></ns2:contact>
      * 
@@ -118,7 +119,7 @@ public class ContactService {
     }
 
     /*You can test it using Postman Chrome App - http://www.getpostman.com/
-     Url: http://localhost:8080/cmsapp/api/contacts/1 using Delete request
+     Url: http://localhost:8080/cms/api/contacts/1 using Delete request
      */
     @DELETE
     @Path("/{id}")

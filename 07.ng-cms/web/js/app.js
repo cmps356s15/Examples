@@ -5,6 +5,11 @@ myApp.config(function($routeProvider) {
                     {
                         templateUrl: '/cms/partials/contacts.html',
                     })
+            .when('/login',
+                    {
+                        templateUrl: '/cms/partials/login.html',
+                        controller: 'LoginController'
+                    })
             .when('/contact',
                     {
                         templateUrl: '/cms/partials/contact.html',
@@ -23,6 +28,21 @@ myApp.config(function($routeProvider) {
             .otherwise({redirectTo: '/'});
 });
 
+myApp.run(function($rootScope, $location) {
+    $rootScope.isLoggedIn = function() {
+        return !angular.isUndefined($rootScope.loggedInUser);
+    };
+    
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+//      console.log(event);
+//      console.log(next);
+//      console.log(current);
+      if (!$rootScope.isLoggedIn()) {
+          $location.path("/login");
+      }
+    });
+ });
+  
 myApp.controller('QuController', function($scope, $http) {
     $scope.address = {
         street: 'University St',

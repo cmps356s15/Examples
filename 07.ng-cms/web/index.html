@@ -7,6 +7,7 @@
         <script src="js/ContactsController.js"></script>
         <script src="js/ContactController.js"></script>
         <script src="js/CityController.js"></script>
+        <script src="js/LoginController.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -29,18 +30,30 @@
                 border-color: green;
                 outline-color: green;
             }
+            .menu-item {
+                padding-right: 10px;
+            }
+            a[ng-click]{
+                cursor: pointer;
+            }
         </style>
         <title>Contacts App</title>
     </head>
-    <body>
+    <body ng-controller="ContactsController">
         <h1>Contacts App</h1>
-
-        <div id='menuu'>
-            <a href="/cms/#/">Contacts</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="/cms/#/cities">Arab Cities</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="/cms/doc.html">How to test CMS Rest Services</a> 
+        <div ng-show="isLoggedIn()" >
+            Welcome {{loggedInUser.firstName}} {{loggedInUser.lastName}}
         </div>
-        <div ng-controller="ContactsController">
+        <br>
+        
+        <div id='menuu'>
+            <a href="/cms/#/" class="menu-item" ng-show="isLoggedIn()">Contacts</a>
+            <a href="/cms/#/cities" class="menu-item" ng-show="isLoggedIn()">Arab Cities</a>
+            <a href="/cms/doc.html" class="menu-item">How to test CMS Rest Services</a>
+            <a href="/cms/#/login" class="menu-item" ng-hide="isLoggedIn()">Login</a> 
+            <a ng-click="logout()" ng-show="isLoggedIn()">Logout</a> 
+        </div>
+        <div>
             <div id='partailsDiv' ng-view></div>
         </div>
     </body>
