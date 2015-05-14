@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 <html>
-    <head lang="en">
+    <head>
         <title>Internship Management System</title>
         <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

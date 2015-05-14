@@ -11,7 +11,7 @@ import javax.ejb.Singleton;
 public class CompanyRepository {
 
     private List<Company> companies = new ArrayList<>();
-    private int lastId = 26;
+    private int lastCompanyId;
     private final String companiesUrl = "http://erradi.github.io/json/company.json";
 
     public Company getCompany(int id) {
@@ -54,19 +54,21 @@ public class CompanyRepository {
         Company[] companyArray = gson.fromJson(companiesStr, Company[].class);
         //Convert the array to a editable list 
         companies = new ArrayList<>(Arrays.asList(companyArray));
+        
+        lastCompanyId = companies.size() + 1;
     }
 
     public List<Company> getCompanies() {
-        if (companies.size() == 0) {
+        if (companies.isEmpty()) {
             initialize();
         }
         return companies;
     }
 
     public int addCompany(Company company) {
-        company.setId(++lastId);
+        company.setId(++lastCompanyId);
         companies.add(company);
-        return lastId;
+        return lastCompanyId;
     }
 
     public boolean exists(String companyName) {

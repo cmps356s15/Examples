@@ -40,14 +40,8 @@ label {
 
 input[type='text'], input[type='date'], input[type='password'], input[type='range'], select {
     margin-bottom: 10px;
-    width: 200px;
+    width: 220px;
 }
-
-input[type='date'] {
-    margin-bottom: 10px;
-    width: 120px;
-}
-
 
 textarea {
     width: 450px; 
@@ -57,7 +51,7 @@ textarea {
 
 table, th, td {
     border: 2px solid lightgray;
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 th {
@@ -76,41 +70,3 @@ tbody tr:nth-child(odd) {
     color: blue;
     background-color: LightYellow;
 }
-
-nav {
-    margin-bottom: 10px;
-}
-
-nav ul {
-    list-style-type: none;
-    font-size: 12pt;
-}
-
-nav ul li {
-    display: inline;
-    margin-left: 10px;
-}
-
-tfooter{
-
-    display: block;
-    clear: both;
-    font-size: 12pt;
-    margin: 12pt;
-}
-
-p{
-    font-style: italic;
-
-}
-
-.seperator{
-    height:1px;
-
-    background:activeborder;
-    margin-bottom: 10px;
-
-    border-bottom: 1px solid #a4c5ce;
-
-}
-

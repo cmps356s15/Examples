@@ -1,61 +1,41 @@
-
 package ims.entity;
 
-import java.util.Date;
-import java.util.List;
+import ims.repository.Utils;
 
 public class Grading {
-
-    private int id;
-    private Faculty examiner;
-    private Internship internship;
-    private Date date;
-    private List<GradingDetail> gradingDetails ;
+    private Criteria criteria;
+    private Rating rating;
+    private String comment;
 
     public Grading() {
     }
 
-    public List<GradingDetail> getGradingDetails() {
-        return gradingDetails;
+    public String getComment() {
+        return comment;
     }
 
-    public void setGradingDetails(List<GradingDetail> gradingDetails) {
-        this.gradingDetails = gradingDetails;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
-     public void addGradingDetails(GradingDetail gradingDetail) {
-        this.gradingDetails.add(gradingDetail);
+
+    
+    public Criteria getCriteria() {
+        return criteria;
+    }
+
+    public void setCriteria(Criteria criteria) {
+        this.criteria = criteria;
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
     }
     
-    public int getId() {
-        return id;
+    public double getSubTotal() {
+        return Utils.round(criteria.getGrade() * rating.getPercentage(), 2);
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Faculty getExaminer() {
-        return examiner;
-    }
-
-    public void setExaminer(Faculty examiner) {
-        this.examiner = examiner;
-    }
-
-    public Internship getInternship() {
-        return internship;
-    }
-
-    public void setInternship(Internship internship) {
-        this.internship = internship;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
 }

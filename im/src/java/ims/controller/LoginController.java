@@ -42,31 +42,24 @@ public class LoginController extends HttpServlet {
         // get username and password and check them
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
+        System.out.println("userRepository" + userRepository);
         User user = userRepository.getUser(username, password);
         if (user == null) {
             request.getSession().setAttribute("message", "Invaild username or password");
             response.sendRedirect("login");
             return;
         }
-        
+
         request.getSession().setAttribute("user", user);
         if (user instanceof Student) {
             int studentId = ((Student) user).getStudentId();
             Internship internship = internshipRepository.getInternship(studentId);
             if (internship == null) {
                 response.sendRedirect("register");
-                return;
-            } else if (internship.getStatus().equals("confirmed")) {
-                List<MenuItem> menuItems = new ArrayList<>();
-                MenuItem item1 = new MenuItem("View Grade", "ViewGrade");
-                MenuItem item2 = new MenuItem("Update", "UpdateInternship");
-                menuItems.add(item1);
-                menuItems.add(item2);
-                request.setAttribute("menuItems", menuItems);
+            } else {
+                request.setAttribute("internship", internship);
+                request.getRequestDispatcher("view-internship.jsp").forward(request, response);
             }
-            request.setAttribute("internship", internship);
-            request.getRequestDispatcher("view-internship.jsp").forward(request, response);
         } else if (user instanceof Faculty) {
             Faculty faculty = (Faculty) user;
             if (faculty.isCoordinator()) {

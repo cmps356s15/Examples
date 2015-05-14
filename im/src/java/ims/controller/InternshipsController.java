@@ -29,7 +29,7 @@ public class InternshipsController extends HttpServlet {
         String selectedState = request.getParameter("state");
 
         if (selectedState == null) {
-            selectedState = "pending";
+            selectedState = "all";
         }
         List<Internship> internships = internshipRepository.getInternships(selectedState);
 

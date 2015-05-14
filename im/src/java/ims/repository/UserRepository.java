@@ -41,21 +41,15 @@ public class UserRepository {
         return student.isPresent() ? student.get() : null;
     }
 
-    public Faculty getFaculty(String username) {
-        Optional<Faculty> faculty = users.stream().filter(u -> u instanceof Faculty && u.getUsername().equals(username)).map(user -> (Faculty) user).findFirst();
+    public Faculty getFaculty(int staffNo) {
+        Optional<Faculty> faculty = users.stream().filter(u -> u instanceof Faculty && ((Faculty)u).getStaffNo() == staffNo).map(user -> (Faculty) user).findFirst();
         return faculty.isPresent() ? faculty.get() : null;
     }
-//
-//    public int getUsersCount() {
-//        return users == null ? 0 : users.size();
-//    }
 
-    @PermitAll
-    @PostConstruct
     public void loadUsers() {
-//        if (users != null && users.size() > 0) {
-//            return;
-//        }
+        if (users != null && !users.isEmpty()) {
+            return;
+        }
 
         Gson gson = new Gson();
         String response = Utils.readUrl(studentUrl);
@@ -75,6 +69,7 @@ public class UserRepository {
         if (users == null) {
             loadUsers();
         }
+        System.out.println("users.size: " + users.size());
         Optional<User> user = users.stream().filter(u -> u.getUsername().equals(username) && u.getPassword().equals(password)).findFirst();
         return user.isPresent() ? user.get() : null;
     }

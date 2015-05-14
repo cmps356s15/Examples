@@ -1,23 +1,23 @@
 package ims.entity;
 
+import ims.repository.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Internship {
+
     private int id;
     private String status;
     private int year;
     private Student student;
     private List<Company> preferredCompanies;
     private Company hostCompany;
-    private Mentor mentor;
     private String presentationLocation;
     private String presentationDate;
     private String presentationTime;
-    private String internshipAbstract;
-    private List<Faculty> examiners;
+    private Faculty examiner;
     private List<Grading> gradings;
-        
+
     public Internship() {
     }
 
@@ -29,12 +29,11 @@ public class Internship {
 
     }
 
-    public Internship(int id, String status, int year, Company hostCompany, Mentor mentor) {
+    public Internship(int id, String status, int year, Company hostCompany) {
         this.id = id;
         this.status = status;
         this.year = year;
         this.hostCompany = hostCompany;
-        this.mentor = mentor;
         preferredCompanies = new ArrayList<>();
     }
 
@@ -106,20 +105,8 @@ public class Internship {
         this.year = year;
     }
 
-    public String getInternshipAbstract() {
-        return internshipAbstract;
-    }
-
-    public void setInternshipAbstract(String internshipAbstract) {
-        this.internshipAbstract = internshipAbstract;
-    }
-
     public void setCompany(Company company) {
         this.hostCompany = company;
-    }
-
-    public void setMentor(Mentor mentor) {
-        this.mentor = mentor;
     }
 
     public int getId() {
@@ -138,25 +125,24 @@ public class Internship {
         return hostCompany;
     }
 
-    public Mentor getMentor() {
-        return mentor;
+    public void setExaminer(Faculty examiner) {
+        this.examiner = examiner;
     }
 
-    public void addGrading(Grading grading) {
-        gradings.add(grading);
-    }
-
-    public void addExaminer(Faculty examiner) {
-        if (examiners == null)
-            examiners = new ArrayList<>();
-        examiners.add(examiner);
-    }
-    
-    List<Faculty> getExaminers() {
-        return examiners;
+    public Faculty getExaminer() {
+        return examiner;
     }
 
     public boolean IsConfirmed() {
         return status.equalsIgnoreCase("confirmed");
+    }
+
+    public double getTotalGrade() {
+        double grade = 0;
+        for (Grading grading : gradings) {
+            System.out.printf("grade %d percent %s", grading.getCriteria().getGrade(), grading.getRating().getPercentage());
+            grade += grading.getCriteria().getGrade() * grading.getRating().getPercentage();
+        }
+        return Utils.round(grade, 2);
     }
 }

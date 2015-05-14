@@ -50,9 +50,9 @@ public class Faculty extends User{
         this.officeNumber = officeNumber;
     }
     
-    public void addInternship(int internshipID){
+    public void addInternship(int internshipId){
         if(internshipsIDs == null) internshipsIDs = new ArrayList();
-        this.internshipsIDs.add(internshipID);
+        this.internshipsIDs.add(internshipId);
     }
 
     public List<Integer> getInternshipsIDs() {

@@ -2,7 +2,6 @@ package ims.controller;
 
 import ims.entity.Faculty;
 import ims.entity.Internship;
-import ims.entity.Student;
 import ims.repository.InternshipRepository;
 import ims.repository.UserRepository;
 import java.io.IOException;
@@ -14,35 +13,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/AssignExaminers")
-public class AssigExaminersController extends HttpServlet {
+@WebServlet("/AssignExaminer")
+public class AssigExaminerController extends HttpServlet {
     @Inject
     UserRepository userRepository;
 
     @Inject
-    InternshipRepository internships;
+    InternshipRepository internshipRepository;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int internshipID = Integer.parseInt(request.getParameter("internshipId"));
-        Internship internship = internships.getInternshipById(internshipID);
+        int internshipId = Integer.parseInt(request.getParameter("internshipId"));
+        Internship internship = internshipRepository.getInternshipById(internshipId);
         List<Faculty> examiners = userRepository.getFaculty();
 
-        request.setAttribute("examinerList", examiners);
+        request.setAttribute("examiners", examiners);
         request.setAttribute("internship", internship);
-        request.getRequestDispatcher("assign-examiners.jsp").forward(request, response);
+        request.getRequestDispatcher("assign-examiner.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String[] examinersIdString = request.getParameterValues("examiners");
-
-        Faculty examiner;
-        int internshipID = Integer.parseInt(request.getParameter("internshipID"));
-        Internship internship = internships.getInternshipById(internshipID);
+        int examinerId = Integer.parseInt(request.getParameter("examiner"));
+        
+        System.out.println("internshipId: " + request.getParameter("internshipId"));
+        int internshipId = Integer.parseInt(request.getParameter("internshipId"));
+        Internship internship = internshipRepository.getInternshipById(internshipId);
 
         // read input fields
         String presentationLocation = request.getParameter("pLocation");
@@ -54,15 +53,12 @@ public class AssigExaminersController extends HttpServlet {
         internship.setPresentationLocation(presentationLocation);
         internship.setPresentationTime(presentationTime);
 
-        //for every examiner selected
-        for (int i = 0; i < examinersIdString.length; i++) {
-            //get examiners id as integer
-            String id = examinersIdString[i];
-            // get examiner object 
-            examiner = userRepository.getFaculty(id);
-            internship.addExaminer(examiner);
-        }
-        request.getSession().setAttribute("message", String.format("Successfully assigned examiners to intenship with ID = %d .", internshipID));
-        response.sendRedirect("coordinatorHome");
+        Faculty examiner = userRepository.getFaculty(examinerId);
+        internship.setExaminer(examiner);
+        
+        internshipRepository.updateInternship(internship);
+        
+        request.getSession().setAttribute("message", String.format("Examiners successfully assigned to intenship #%d", internshipId));
+        response.sendRedirect("internships");
     }
 }

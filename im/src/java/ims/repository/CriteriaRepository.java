@@ -4,9 +4,7 @@ import ims.entity.Criteria;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.ejb.Singleton;
 
 @Singleton
@@ -15,7 +13,7 @@ public class CriteriaRepository {
     private List<Criteria> criterias;
     private final String criteriaUrl = "http://erradi.github.io/json/criteria.json";
 
-    public List<Criteria> getCriterias() {
+    public List<Criteria> getCriteria() {
         if (criterias == null) {
             loadCriteria();
         }
@@ -42,14 +40,4 @@ public class CriteriaRepository {
 
         criterias = new ArrayList<>(Arrays.asList(criteriaArray));
     }
-
-    public List<String> getCategories() {
-        Set<String> categories = new HashSet();
-        for (int i = 0; i < getCriterias().size(); i++) {
-            categories.add(getCriterias().get(i).getCategory());
-        }
-
-        return new ArrayList<String>(categories);
-    }
-
 }

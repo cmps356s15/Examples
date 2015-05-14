@@ -7,16 +7,14 @@
         <link href="css/styles.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <script src="js/script.js"></script>
         <jsp:include page="header.jsp" />
-
         <br>
-        <form action="internships" method="post">
+        <form action="internship" method="post">
             <label for="state">Status</label>
             <select id ="state" name="state" onchange='this.form.submit()'>
                 <c:forEach var="state" items="${states}">
                     <option value="${state}"
-                        ${selectedState eq state ? "selected" : "" }>
+                            ${selectedState eq state ? "selected" : "" }>
                         ${state}
                     </option>
                 </c:forEach>
@@ -29,7 +27,7 @@
         </c:if>
 
         <c:if test="${empty internships}">
-            <p>  There are no ${selectedState eq 'all' ? " " : selectedState} internships.</p>
+            <p>  There are no ${selectedState eq 'all' ? " " : selectedState} internship.</p>
         </c:if>
         <c:if test="${not empty internships}">
             <table id="internshipListTable" name="internshipListTable" >
@@ -41,27 +39,38 @@
                         <th>Year</th>
                         <th>status</th>
                         <th>Host Company</th>
+                        <th>Examiner</th>
+                        <th>Presentation</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="internships" items="${requestScope.internships}">
+                    <c:forEach var="internship" items="${internships}">
                         <tr>
-                            <td> ${internships.id} </td>
-                            <td> ${internships.student.studentId}</td>
-                            <td> ${internships.student.firstName} ${internships.student.lastName}</td>
-                            <td> ${internships.year} </td>
-                            <td> ${internships.status} </td>
-                            <td> ${internships.hostCompany.name} </td>
-                            <c:if test='${internships.status eq "pending"}'>
+                            <td> ${internship.id} </td>
+                            <td> ${internship.student.studentId}</td>
+                            <td> ${internship.student.firstName} ${internship.student.lastName}</td>
+                            <td> ${internship.year} </td>
+                            <td> ${internship.status} </td>
+                            <td> ${internship.hostCompany.name} </td>
+                            <td> ${internship.examiner.name} </td>
+                            <td>
+                                ${internship.presentationDate} ${internship.presentationTime} 
+                                @ ${internship.presentationLocation}
+                            </td>
+                            <c:if test='${internship.status eq "pending"}'>
                                 <td>
-                                    <a href="confirm?internshipId=${internships.id}">
+                                    <a href="confirm?internshipId=${internship.id}">
                                         Confirm
                                     </a>               
                                 </td>
                             </c:if>
-                            <c:if test='${internships.status eq "confirmed"}'>
-                                <td>    <a href="AssignExaminers?internshipId=${internships.id}">Assign Faculty</a>       </td>
+                            <c:if test='${internship.status eq "confirmed"}'>
+                                <td>    
+                                    <a href="AssignExaminer?internshipId=${internship.id}">
+                                        Assign Examiner
+                                    </a>
+                                </td>
                             </c:if>
                         </tr>
                     </c:forEach>

@@ -1,11 +1,11 @@
 package ims.repository;
 
 import ims.entity.Company;
-import ims.entity.Faculty;
 import ims.entity.Internship;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 
@@ -14,8 +14,10 @@ public class InternshipRepository {
 
     @Inject
     CompanyRepository companyRepository;
+    @Inject
+    UserRepository userRepository;
 
-    private List<Internship> internships = internships = new ArrayList<>();
+    private List<Internship> internships = new ArrayList<>();
     private int lastInternshipId = 0;
 
     public Internship getInternship(int studentId) {
@@ -29,6 +31,9 @@ public class InternshipRepository {
     }
 
     public List<Internship> getInternships() {
+        if (internships.isEmpty()) {
+            insertTestData();
+        }
         return internships;
     }
 
@@ -42,7 +47,19 @@ public class InternshipRepository {
         internships.remove(internship);
     }
 
+    public List<Internship> getInternships(int examinerId) {
+        if (internships.isEmpty()) {
+            insertTestData();
+        }
+        List<Internship> examinerInternships = internships.stream().filter(i -> i.getExaminer() != null && i.getExaminer().getStaffNo() == examinerId).collect(Collectors.toList());
+        return examinerInternships;
+    }
+
     public List<Internship> getInternships(String state) {
+        if (internships.isEmpty()) {
+            insertTestData();
+        }
+
         //if state is "all" , just return all intenrships
         if (state.equals("all")) {
             return getInternships();
@@ -82,5 +99,29 @@ public class InternshipRepository {
         internship.setHostCompany(company);
         internship.setStatus("confirmed");
         updateInternship(internship);
+    }
+
+    private void insertTestData() {
+        Internship internship = new Internship();
+        internship.setStudent(userRepository.getStudent("student1"));
+        internship.setStatus("confirmed");
+        internship.setYear(2015);
+        internship.setHostCompany(companyRepository.getCompany("Mada"));
+        internship.setExaminer(userRepository.getFaculty(501));
+        addInternship(internship);
+
+        internship = new Internship();
+        internship.setStudent(userRepository.getStudent("student2"));
+        internship.setStatus("pending");
+        internship.setYear(2015);
+        addInternship(internship);
+
+        internship = new Internship();
+        internship.setStudent(userRepository.getStudent("student3"));
+        internship.setStatus("confirmed");
+        internship.setYear(2015);
+        internship.setHostCompany(companyRepository.getCompany("AlJazeera"));
+        internship.setExaminer(userRepository.getFaculty(501));
+        addInternship(internship);
     }
 }
