@@ -26,7 +26,7 @@ public class TaskRepository {
 
     public int addTask(Integer userId, Task task) {
 
-        List<Task> userTasks = tasks.get(userId);
+        List<hifzTracker.entity.Task> userTasks = tasks.get(userId);
         if (userTasks == null) {
             userTasks = new ArrayList();
         }

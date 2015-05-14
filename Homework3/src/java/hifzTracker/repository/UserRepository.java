@@ -1,6 +1,7 @@
 package hifzTracker.repository;
 
-import com.google.gson.Gson;
+import com.google.gson.*;
+import hifzTracker.entity.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -66,7 +67,7 @@ public class UserRepository {
             return;
         }
 
-        Gson gson = new Gson();
+        com.google.gson.Gson gson = new com.google.gson.Gson();
         String usersStr = Utils.readUrl(usersUrl);
         System.out.println(usersStr);
 
