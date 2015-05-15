@@ -24,14 +24,13 @@ public class RatingRepository {
         if (Ratings == null) {
             loadRating();
         }
-            return Ratings.stream().filter(c -> c.getId() == id).findFirst().get();
+        return Ratings.stream().filter(c -> c.getId() == id).findFirst().get();
     }
 
     public void loadRating() {
         if (Ratings != null && Ratings.size() > 0) {
             return;
         }
-
         Gson gson = new Gson();
         String ratingStr = Utils.readUrl(ratingUrl);
         System.out.println(ratingStr);

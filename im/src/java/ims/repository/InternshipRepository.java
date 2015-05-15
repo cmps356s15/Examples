@@ -11,13 +11,12 @@ import javax.inject.Inject;
 
 @Singleton
 public class InternshipRepository {
-
     @Inject
     CompanyRepository companyRepository;
     @Inject
     UserRepository userRepository;
 
-    private List<Internship> internships = new ArrayList<>();
+    private List<Internship> internships;
     private int lastInternshipId = 0;
 
     public Internship getInternship(int studentId) {
@@ -31,7 +30,7 @@ public class InternshipRepository {
     }
 
     public List<Internship> getInternships() {
-        if (internships.isEmpty()) {
+        if (internships == null || internships.isEmpty()) {
             insertTestData();
         }
         return internships;
@@ -48,7 +47,7 @@ public class InternshipRepository {
     }
 
     public List<Internship> getInternships(int examinerId) {
-        if (internships.isEmpty()) {
+        if (internships == null || internships.isEmpty()) {
             insertTestData();
         }
         List<Internship> examinerInternships = internships.stream().filter(i -> i.getExaminer() != null && i.getExaminer().getStaffNo() == examinerId).collect(Collectors.toList());
@@ -56,7 +55,7 @@ public class InternshipRepository {
     }
 
     public List<Internship> getInternships(String state) {
-        if (internships.isEmpty()) {
+        if (internships == null || internships.isEmpty()) {
             insertTestData();
         }
 
@@ -99,6 +98,7 @@ public class InternshipRepository {
     }
 
     private void insertTestData() {
+        internships = new ArrayList<>();
         Internship internship = new Internship();
         internship.setStudent(userRepository.getStudent("student1"));
         internship.setStatus("confirmed");

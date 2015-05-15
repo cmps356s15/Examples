@@ -47,8 +47,8 @@
             </tbody>
         </table>
         <br>
-        <c:if test="${not empty internship.gradings}">
-            <a href="ViewGrade?internshipId=${internship.id}">View Grade</a>
+        <c:if test="${not empty internship.gradeItems}">
+            <a href="grade?internshipId=${internship.id}">View Grade</a>
         </c:if>
     </body>
 </html>

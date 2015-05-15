@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/AssignExaminer")
-public class ExaminerController extends HttpServlet {
+public class AssignExaminerController extends HttpServlet {
     @Inject
     UserRepository userRepository;
 

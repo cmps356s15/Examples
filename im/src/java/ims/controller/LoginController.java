@@ -2,14 +2,11 @@ package ims.controller;
 
 import ims.entity.Faculty;
 import ims.entity.Internship;
-import ims.entity.MenuItem;
 import ims.entity.Student;
 import ims.entity.User;
 import ims.repository.InternshipRepository;
 import ims.repository.UserRepository;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,8 +35,6 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        // get username and password and check them
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         System.out.println("userRepository" + userRepository);

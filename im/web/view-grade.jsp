@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="grade" items="${internship.gradings}">
+                <c:forEach var="grade" items="${internship.gradeItems}">
                     <tr>
                         <td>
                             <p style="font-weight: bold">

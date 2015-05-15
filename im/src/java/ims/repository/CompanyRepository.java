@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import javax.ejb.Singleton;
 
 @Singleton
@@ -15,36 +16,28 @@ public class CompanyRepository {
     private final String companiesUrl = "http://erradi.github.io/json/company.json";
 
     public Company getCompany(int id) {
-        if (companies.size() == 0) {
+        if (companies.isEmpty()) {
             this.initialize();
         }
 
-        for (int i = 0; i < companies.size(); i++) {
-            if (companies.get(i).getId() == id) {
-                return companies.get(i);
-            }
-        }
+        Optional<Company> company
+                = companies.stream().filter(c -> c.getId() == id).findFirst();
 
-        return null;
-
+        return company.isPresent() ? company.get() : null;
     }
 
     public Company getCompany(String name) {
-        if (companies.size() == 0) {
+        if (companies.isEmpty()) {
             this.initialize();
         }
+        Optional<Company> company
+                = companies.stream().filter(c -> c.getName().equals(name)).findFirst();
 
-        for (int i = 0; i < companies.size(); i++) {
-            if (companies.get(i).getName().equals(name)) {
-                return companies.get(i);
-            }
-        }
-
-        return null;
+        return company.isPresent() ? company.get() : null;
     }
 
     public void initialize() {
-        if (companies != null && companies.size() > 0) {
+        if (companies != null && !companies.isEmpty()) {
             return;
         }
 
@@ -54,8 +47,8 @@ public class CompanyRepository {
         Company[] companyArray = gson.fromJson(companiesStr, Company[].class);
         //Convert the array to a editable list 
         companies = new ArrayList<>(Arrays.asList(companyArray));
-        
-        lastCompanyId = companies.size() + 1;
+
+        lastCompanyId = companies.size() + 2;
     }
 
     public List<Company> getCompanies() {

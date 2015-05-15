@@ -2,7 +2,7 @@ package ims.controller;
 
 import ims.entity.Criteria;
 import ims.entity.Faculty;
-import ims.entity.Grading;
+import ims.entity.GradeItem;
 import ims.entity.Internship;
 import ims.entity.Rating;
 import ims.repository.CriteriaRepository;
@@ -76,24 +76,24 @@ public class GradingContoller extends HttpServlet {
 
         int internshipId = Integer.parseInt(request.getParameter("internshipId"));
         Internship internship = internshipRepository.getInternshipById(internshipId);
-        List<Grading> gradings = new ArrayList<>();
+        List<GradeItem> gradeItems = new ArrayList<>();
         List<Criteria> criteriaList = criteriaRepository.getCriteria();
 
         // loop over each criteria + get its rating + its comment
         for (int i = 0; i < criteriaList.size(); i++) {
-            Grading grading = new Grading();
+            GradeItem gradeItem = new GradeItem();
             Criteria criteria = criteriaList.get(i);
             int ratingID = Integer.parseInt(ratings[i]);
             Rating rating = ratingRepository.getRating(ratingID);
             String comment = comments[i];
 
-            grading.setCriteria(criteria);
-            grading.setRating(rating);
-            grading.setComment(comment);
-            gradings.add(grading);
+            gradeItem.setCriteria(criteria);
+            gradeItem.setRating(rating);
+            gradeItem.setComment(comment);
+            gradeItems.add(gradeItem);
         }
 
-        internship.setGradings(gradings);
+        internship.setGradeItems(gradeItems);
         internshipRepository.updateInternship(internship);
         System.out.printf("Grade: %.2f", internship.getTotalGrade());
 

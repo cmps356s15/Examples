@@ -22,7 +22,9 @@ body {
 }
 
 .header h1 {
-    vertical-align:middle; display:table-cell; padding-left:20px
+    vertical-align:middle; 
+    display:table-cell; 
+    padding-left:100px;
 }
 
 .header span {

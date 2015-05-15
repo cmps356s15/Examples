@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class Utils {
-
     public static String readUrl(String urlString) {
         String content = "";
         try {

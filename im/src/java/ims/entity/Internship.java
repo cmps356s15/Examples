@@ -16,7 +16,7 @@ public class Internship {
     private String presentationDate;
     private String presentationTime;
     private Faculty examiner;
-    private List<Grading> gradings;
+    private List<GradeItem> gradeItems;
 
     public Internship() {
     }
@@ -69,12 +69,12 @@ public class Internship {
         this.student = student;
     }
 
-    public List<Grading> getGradings() {
-        return gradings;
+    public List<GradeItem> getGradeItems() {
+        return gradeItems;
     }
 
-    public void setGradings(List<Grading> gradings) {
-        this.gradings = gradings;
+    public void setGradeItems(List<GradeItem> gradeItems) {
+        this.gradeItems = gradeItems;
     }
 
     public Company getHostCompany() {
@@ -139,9 +139,9 @@ public class Internship {
 
     public double getTotalGrade() {
         double grade = 0;
-        for (Grading grading : gradings) {
-            System.out.printf("grade %d percent %s", grading.getCriteria().getGrade(), grading.getRating().getPercentage());
-            grade += grading.getCriteria().getGrade() * grading.getRating().getPercentage();
+        for (GradeItem gradeItem : gradeItems) {
+            System.out.printf("grade %d percent %s", gradeItem.getCriteria().getGrade(), gradeItem.getRating().getPercentage());
+            grade += gradeItem.getCriteria().getGrade() * gradeItem.getRating().getPercentage();
         }
         return Utils.round(grade, 2);
     }

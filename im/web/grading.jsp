@@ -15,6 +15,7 @@
         </c:if>
             
         <c:if test="${not empty internships}">
+            <div id="gradingForm">
             <h1>Internship Grading</h1>
             <br>
             <form action="grading" method="post">
@@ -43,20 +44,19 @@
                       <c:forEach var="criterion" items="${criteria}" varStatus="loopIndex">
                       <tr>
                         <input type="hidden" name="criteriaId" value="${criterion.id}">
-                        <td class="criterea" data-grade="${criterion.grade}">
+                        <td class="criteria" data-grade="${criterion.grade}">
                             <p style="font-weight: bold">
                                 ${loopIndex.count}. ${criterion.title} (out of ${criterion.grade})
                             </p>
                             ${criterion.description}
                         </td>
                         <td>
-                            <!--${rating.id eq ratings[criterion.id] ? "selected" : ""}-->
                             <select name="rating" class="rating" required>
                                 <option value=""></option>
                                 <c:forEach var="rating" items="${ratings}">
                                     <option value="${rating.id}" 
                                             data-percentage="${rating.percentage}"
-                                            ${rating.id eq internship.gradings.get(loopIndex.count-1).rating.id ? "selected" : ""}
+                                            ${rating.id eq internship.gradeItems.get(loopIndex.count-1).rating.id ? "selected" : ""}
                                             >
                                         ${rating.title}
                                     </option>
@@ -64,18 +64,18 @@
                             </select>
                         </td>
                         <td>
-                            <textarea name="comment">
-                                ${internship.gradings.get(loopIndex.count-1).comment}
-                            </textarea>
+                            <textarea name="comment">${internship.gradeItems.get(loopIndex.count-1).comment}</textarea>
                         </td>
                      </tr>
                      </c:forEach>
                     </tbody>
                 </table>
                 <br>
+                <div id="totalGrade"></div>
                 <br>
                 <input type="submit" value="submit">
             </form>
+           </div>
         </c:if>
     </body>
 </html>

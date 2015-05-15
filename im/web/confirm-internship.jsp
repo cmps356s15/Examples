@@ -20,7 +20,7 @@
             Internship #${internship.id} for Student ${internship.student.studentId} - ${internship.student.name}
             </h3>
             <label>Select a company</label>
-            <select name="company" id="company" required>
+            <select name="company" id="company" required onchange='if (this.selectedIndex === 1) {this.form.submit();}'>
                 <option value=""></option>
                 <option value="0">* Add Company *</option>
                     <c:forEach var="company" items="${companies}">

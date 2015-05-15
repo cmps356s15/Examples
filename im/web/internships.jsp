@@ -8,7 +8,7 @@
     <body>
         <jsp:include page="header.jsp" />
         <br>
-        <form action="internship" method="post">
+        <form action="internships" method="post">
             <label for="state">Status</label>
             <select id ="state" name="state" onchange='this.form.submit()'>
                 <c:forEach var="state" items="${states}">

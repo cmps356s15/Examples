@@ -10,34 +10,33 @@ import javax.ejb.Singleton;
 @Singleton
 public class CriteriaRepository {
 
-    private List<Criteria> criterias;
+    private List<Criteria> criteria;
     private final String criteriaUrl = "http://erradi.github.io/json/criteria.json";
 
     public List<Criteria> getCriteria() {
-        if (criterias == null) {
+        if (criteria == null) {
             loadCriteria();
         }
-        return criterias;
+        return criteria;
     }
 
     public Criteria getCriteria(int id) {
-        if (criterias != null) {
+        if (criteria != null) {
             loadCriteria();
         }
-        return criterias.stream().filter(c -> c.getId() == id).findFirst().get();
+        return criteria.stream().filter(c -> c.getId() == id).findFirst().get();
     }
 
     public void loadCriteria() {
-        if (criterias != null && criterias.size() > 0) {
+        if (criteria != null && criteria.size() > 0) {
             return;
         }
-
         Gson gson = new Gson();
         String criteriasStr = Utils.readUrl(criteriaUrl);
         System.out.println(criteriasStr);
 
         Criteria[] criteriaArray = gson.fromJson(criteriasStr, Criteria[].class);
 
-        criterias = new ArrayList<>(Arrays.asList(criteriaArray));
+        criteria = new ArrayList<>(Arrays.asList(criteriaArray));
     }
 }

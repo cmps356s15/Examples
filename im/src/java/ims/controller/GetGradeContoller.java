@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ViewGrade")
-public class ViewGradeContoller extends HttpServlet {
+@WebServlet("/grade")
+public class GetGradeContoller extends HttpServlet {
 
     @Inject
     InternshipRepository internshipRepository;

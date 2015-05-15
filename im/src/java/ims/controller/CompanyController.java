@@ -51,7 +51,10 @@ public class CompanyController extends HttpServlet {
         company.setCity(request.getParameter("city"));
 
         int companyId = companyRepository.addCompany(company);
-
+        
+        System.out.println("lastCompanyId : " + companyId);
+        System.out.println("Company : " + companyRepository.getCompany(companyId).getId() + " " + companyRepository.getCompany(companyId).getName());
+        
         internshipRepository.confirmInternship(internshipId, companyId);
         String message = String.format("Company %s successfully added", companyName);
         message += String.format("<br>Intenship #%d confirmed", internshipId);
