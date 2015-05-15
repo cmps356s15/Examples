@@ -34,13 +34,14 @@ body {
 }
 
 label {
-    min-width: 140px;
+    display: inline-block;
+    min-width: 145px;
     margin-bottom: 10px;
 }
 
-input[type='text'], input[type='date'], input[type='password'], input[type='range'], select {
+input:not([type=submit]), select {
     margin-bottom: 10px;
-    width: 220px;
+    min-width: 220px;
 }
 
 textarea {
@@ -51,7 +52,6 @@ textarea {
 
 table, th, td {
     border: 2px solid lightgray;
-    /* padding: 10px; */
 }
 
 th {

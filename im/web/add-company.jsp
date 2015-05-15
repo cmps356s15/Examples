@@ -1,8 +1,7 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
         <title>Internship Management System</title>
         <link href="css/styles.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -16,25 +15,25 @@
         </c:if>
 
         <form action="company" method="post">
-            <label for="companyName"> Name:</label>
-            <input id="companyName" name="companyName" type="text" required><br>
-
-            <label for="companyEmail"> Email:</label>
-            <input id="companyEmail" name="companyEmail" type="text" required><br>
-
-            <label for="companyPhone"> Phone number:</label>
-            <input id="companyPhone" name="companyPhone" type="text" required><br>
-
-            <label for="companyURL"> Website Url:</label>
-            <input id="companyURL" name="companyURL" type="text" required><br>
-
-            <label for="companyURL">Street:</label>
-            <input id="companyStreet" name="companyStreet" type="text" required><br>
-            
-            <label for="companyURL"> City:</label>
-            <input id="companyCity" name="companyCity" type="text" required><br>
-
             <input type="hidden" name="internshipId" value="${internshipId}">
+            <label for="name">Name:</label>
+            <input id="name" name="name" type="text" required><br>
+
+            <label for="email">Email:</label>
+            <input id="email" name="email" type="email" required><br>
+
+            <label for="phone">Phone number:</label>
+            <input id="phone" name="phone" type="text" required><br>
+
+            <label for="website">Website Url:</label>
+            <input id="website" name="website" type="url" required><br>
+
+            <label for="street">Street:</label>
+            <input id="street" name="street" type="text" required><br>
+            
+            <label for="city">City:</label>
+            <input id="city" name="city" type="text" required><br>
+
             <input type="submit" value="Submit">
         </form>
     </body>

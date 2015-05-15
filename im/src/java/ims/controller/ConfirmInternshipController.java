@@ -47,6 +47,6 @@ public class ConfirmInternshipController extends HttpServlet {
         List<Company> companies = companyRepository.getCompanies();
         request.setAttribute("internship", internship);
         request.setAttribute("companies", companies);
-        request.getRequestDispatcher("confirm.jsp").forward(request, response);
+        request.getRequestDispatcher("confirm-internship.jsp").forward(request, response);
     }
 }

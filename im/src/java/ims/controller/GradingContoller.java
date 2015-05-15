@@ -31,6 +31,44 @@ public class GradingContoller extends HttpServlet {
     @Inject
     InternshipRepository internshipRepository;
 
+        @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("user") == null) {
+            response.sendRedirect("login");
+            return;
+        }
+
+        int selectedInternshipId = 0;
+        //if (request.getSession().getAttribute("internshipId") != null) {
+        if (request.getParameter("internshipId") != null) {
+            selectedInternshipId = Integer.parseInt(request.getParameter("internshipId")); 
+            //Integer.parseInt(request.getSession().getAttribute("selectedInternshipId").toString());
+        }
+
+        Faculty examiner = (Faculty) request.getSession().getAttribute("user");
+        List<Internship> internships = internshipRepository.getInternships(examiner.getStaffNo());
+
+        if (internships != null && !internships.isEmpty()) {
+            System.out.println("internships.count: " + internships.size());
+            
+            Internship selectedInternship = null;
+            if (selectedInternshipId == 0) {
+                selectedInternship = internships.get(0);
+                selectedInternshipId = selectedInternship.getId();
+            } else {
+                final int id = selectedInternshipId ;
+                selectedInternship = internships.stream().filter(i -> i.getId() == id).findFirst().get();
+            }
+            
+            request.setAttribute("selectedInternshipId", selectedInternshipId);
+            request.setAttribute("internship", selectedInternship);
+            request.setAttribute("internships", internships);
+            request.setAttribute("criteria", criteriaRepository.getCriteria());
+            request.setAttribute("ratings", ratingRepository.getRatings());
+        }
+        request.getRequestDispatcher("grading.jsp").forward(request, response);
+    }
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String[] ratings = request.getParameterValues("rating");
@@ -60,25 +98,10 @@ public class GradingContoller extends HttpServlet {
         System.out.printf("Grade: %.2f", internship.getTotalGrade());
 
         request.getSession().setAttribute("message", String.format("Internship grading done for internship #%d", internshipId));
-        response.sendRedirect("grading");
+        //request.getSession().setAttribute("selectedInternshipId", internshipId);
+
+        response.sendRedirect("grading?internshipId=" + internshipId);
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute("user") == null) {
-            response.sendRedirect("login");
-            return;
-        }
 
-        Faculty examiner = (Faculty) request.getSession().getAttribute("user");
-        List<Internship> internships = internshipRepository.getInternships(examiner.getStaffNo());
-
-        System.out.println("internships.count: " + internships.size());
-
-        request.setAttribute("internships", internships);
-        request.setAttribute("criteria", criteriaRepository.getCriteria());
-        request.setAttribute("ratings", ratingRepository.getRatings());
-
-        request.getRequestDispatcher("grading.jsp").forward(request, response);
-    }
 }

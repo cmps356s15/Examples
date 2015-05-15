@@ -5,8 +5,6 @@
 <html>
     <head>
         <title>Internship Management System</title>
-        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <link href="css/styles.css" rel="stylesheet">
     </head>
     <body>
@@ -24,7 +22,7 @@
             <label>Select a company</label>
             <select name="company" id="company" required>
                 <option value=""></option>
-                <option value="0">Add new company</option>
+                <option value="0">* Add Company *</option>
                     <c:forEach var="company" items="${companies}">
                     <option value='${company.id}'>
                         ${company.name}

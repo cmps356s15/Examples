@@ -65,13 +65,10 @@ public class InternshipRepository {
             return getInternships();
         }
 
-        List<Internship> selectedInternships = new ArrayList<>();
-        for (Internship internship : getInternships()) {
-            if (internship.getStatus().equals(state)) {
-                selectedInternships.add(internship);
-            }
-        }
-        return selectedInternships;
+        List<Internship> internshipList = 
+                internships.stream().filter(i -> i.getStatus().equals(state)).collect(Collectors.toList());
+                
+        return internshipList;
     }
 
     public List<String> getInternshipStates() {

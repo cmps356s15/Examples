@@ -18,7 +18,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>Criteria</th>
+                    <th style="width: 60%">Criteria</th>
                     <th>Rating</th>
                     <th>Grade</th>
                     <th>Comments</th>
@@ -38,7 +38,7 @@
                         <td>${grade.comment} </td>
                     </tr>
                 </c:forEach>
-                <tr>
+                <tr style="font-weight: bold">
                     <td>Total  (out of 100):  </td>
                     <td colspan="3"> ${internship.totalGrade} </td>
                 </tr>

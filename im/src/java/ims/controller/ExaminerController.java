@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/AssignExaminer")
-public class AssigExaminerController extends HttpServlet {
+public class ExaminerController extends HttpServlet {
     @Inject
     UserRepository userRepository;
 
@@ -38,20 +38,13 @@ public class AssigExaminerController extends HttpServlet {
             throws ServletException, IOException {
 
         int examinerId = Integer.parseInt(request.getParameter("examiner"));
-        
-        System.out.println("internshipId: " + request.getParameter("internshipId"));
         int internshipId = Integer.parseInt(request.getParameter("internshipId"));
         Internship internship = internshipRepository.getInternshipById(internshipId);
 
-        // read input fields
-        String presentationLocation = request.getParameter("pLocation");
-        String presentationDate = request.getParameter("pDate");
-        String presentationTime = request.getParameter("pTime");
-
-        // add the location , date and time to the internship object
-        internship.setPresentationDate(presentationDate);
-        internship.setPresentationLocation(presentationLocation);
-        internship.setPresentationTime(presentationTime);
+        //Assign the location , date and time to the internship
+        internship.setPresentationLocation(request.getParameter("presentationLocation"));
+        internship.setPresentationDate(request.getParameter("presentationDate"));
+        internship.setPresentationTime(request.getParameter("presentationTime"));
 
         Faculty examiner = userRepository.getFaculty(examinerId);
         internship.setExaminer(examiner);

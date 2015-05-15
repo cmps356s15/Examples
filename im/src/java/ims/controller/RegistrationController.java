@@ -29,7 +29,7 @@ public class RegistrationController extends HttpServlet {
 
         List<Company> companies = companyRepository.getCompanies();
         request.setAttribute("companies", companies);
-        request.getRequestDispatcher("register.jsp").forward(request, response);
+        request.getRequestDispatcher("register-internship.jsp").forward(request, response);
     }
 
     @Override
@@ -58,5 +58,4 @@ public class RegistrationController extends HttpServlet {
         request.setAttribute("internship", internship);
         request.getRequestDispatcher("view-internship.jsp").forward(request, response);
     }
-
 }

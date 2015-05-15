@@ -4,20 +4,9 @@
 <html>
     <head>
         <title>Internship Management System</title>
-        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <link href="css/styles.css" rel="stylesheet">
-
-        <script>
-            $(document).ready(function () {
-                $('#companies').change(function () {
-                    this.setCustomValidity('');
-                    if ($(this).val().length > 4) {
-                        this.setCustomValidity('You can only select up to 4 companies!');
-                    }
-                });
-            });
-        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="js/script.js"></script>
     </head>
     <body>
         <jsp:include page="header.jsp" />

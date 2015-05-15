@@ -31,9 +31,9 @@ public class CompanyController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String companyName = request.getParameter("companyName");
+        String companyName = request.getParameter("name");
         int internshipId = Integer.parseInt(request.getParameter("internshipId"));
-        
+
         if (companyRepository.exists(companyName)) {
             String message = companyName + " already exists";
             request.getSession().setAttribute("message", message);
@@ -44,23 +44,18 @@ public class CompanyController extends HttpServlet {
 
         Company company = new Company();
         company.setName(companyName);
-        String email = request.getParameter("companyEmail");
-        String phone = request.getParameter("companyPhone");
-        String URL = request.getParameter("companyURL");
-        String city = request.getParameter("companyCity");
-        String street = request.getParameter("companyStreet");
-        company.setEmail(email);
-        company.setWebsite(URL);
-        company.setPhone(phone);
-        company.setCity(city);
-        company.setStreet(street);
+        company.setEmail(request.getParameter("email"));
+        company.setWebsite(request.getParameter("website"));
+        company.setPhone(request.getParameter("phone"));
+        company.setStreet(request.getParameter("street"));
+        company.setCity(request.getParameter("city"));
 
         int companyId = companyRepository.addCompany(company);
 
         internshipRepository.confirmInternship(internshipId, companyId);
         String message = String.format("Company %s successfully added", companyName);
-        message +=  String.format("<br>Intenship #%d confirmed", internshipId);
-        
+        message += String.format("<br>Intenship #%d confirmed", internshipId);
+
         request.getSession().setAttribute("message", message);
         response.sendRedirect("internships");
     }

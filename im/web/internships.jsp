@@ -3,7 +3,6 @@
 <html>
     <head >
         <title>Internship Management System</title>
-        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
         <link href="css/styles.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -56,7 +55,8 @@
                             <td> ${internship.examiner.name} </td>
                             <td>
                                 ${internship.presentationDate} ${internship.presentationTime} 
-                                @ ${internship.presentationLocation}
+                                ${not empty internship.presentationLocation ? "@ " : ""}
+                                ${internship.presentationLocation}
                             </td>
                             <c:if test='${internship.status eq "pending"}'>
                                 <td>

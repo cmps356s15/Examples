@@ -40,7 +40,8 @@
                     <td>${internship.examiner.name}</td>
                     <td>
                         ${internship.presentationDate} ${internship.presentationTime} 
-                        @ ${internship.presentationLocation}
+                        ${not empty internship.presentationLocation ? "@ " : ""}
+                        ${internship.presentationLocation}
                     </td>
                 </tr>
             </tbody>
