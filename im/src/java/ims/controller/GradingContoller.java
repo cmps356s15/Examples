@@ -5,9 +5,8 @@ import ims.entity.Faculty;
 import ims.entity.GradeItem;
 import ims.entity.Internship;
 import ims.entity.Rating;
-import ims.repository.CriteriaRepository;
+import ims.repository.GradingRepository;
 import ims.repository.InternshipRepository;
-import ims.repository.RatingRepository;
 import ims.repository.UserRepository;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,9 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GradingContoller extends HttpServlet {
 
     @Inject
-    CriteriaRepository criteriaRepository;
-    @Inject
-    RatingRepository ratingRepository;
+    GradingRepository gradingRepository;
     @Inject
     UserRepository userRepository;
     @Inject
@@ -63,8 +60,8 @@ public class GradingContoller extends HttpServlet {
             request.setAttribute("selectedInternshipId", selectedInternshipId);
             request.setAttribute("internship", selectedInternship);
             request.setAttribute("internships", internships);
-            request.setAttribute("criteria", criteriaRepository.getCriteria());
-            request.setAttribute("ratings", ratingRepository.getRatings());
+            request.setAttribute("criteria", gradingRepository.getCriteria());
+            request.setAttribute("ratings", gradingRepository.getRatings());
         }
         request.getRequestDispatcher("grading.jsp").forward(request, response);
     }
@@ -77,14 +74,14 @@ public class GradingContoller extends HttpServlet {
         int internshipId = Integer.parseInt(request.getParameter("internshipId"));
         Internship internship = internshipRepository.getInternshipById(internshipId);
         List<GradeItem> gradeItems = new ArrayList<>();
-        List<Criteria> criteriaList = criteriaRepository.getCriteria();
+        List<Criteria> criteriaList = gradingRepository.getCriteria();
 
         // loop over each criteria + get its rating + its comment
         for (int i = 0; i < criteriaList.size(); i++) {
             GradeItem gradeItem = new GradeItem();
             Criteria criteria = criteriaList.get(i);
             int ratingID = Integer.parseInt(ratings[i]);
-            Rating rating = ratingRepository.getRating(ratingID);
+            Rating rating = gradingRepository.getRating(ratingID);
             String comment = comments[i];
 
             gradeItem.setCriteria(criteria);
@@ -98,10 +95,6 @@ public class GradingContoller extends HttpServlet {
         System.out.printf("Grade: %.2f", internship.getTotalGrade());
 
         request.getSession().setAttribute("message", String.format("Internship grading done for internship #%d", internshipId));
-        //request.getSession().setAttribute("selectedInternshipId", internshipId);
-
         response.sendRedirect("grading?internshipId=" + internshipId);
     }
-
-
 }
