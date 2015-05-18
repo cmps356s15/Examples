@@ -4,7 +4,7 @@ import javax.ejb.Stateless;
 import javax.jws.WebService;
 	
 @Stateless
-//@WebService
+@WebService
 public class Calculator implements ICalculator {
 	
     public int add(int num1, int num2) {

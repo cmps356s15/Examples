@@ -1,0 +1,33 @@
+
+        <h2>Completed Tasks</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sura</th>
+                    <th>Ayats</th>
+                    <th>Type</th>
+                    <th>Due Date</th>
+                    <th>Completed Date</th>
+                    <th>Hifz level</th>
+                    <th>Comment</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr ng-repeat="task in tasks">
+                    <td>{{task.surah.name}} - {{task.surah.englishName}}</td>
+                    <td>{{task.fromAya}} to {{task.toAya}}</td>
+                    <td>{{task.type}}</td>
+                    <td>
+                        {{task.dueDate | date:'yyyy-MM-dd'}}
+                    </td>
+                    <td>
+                        {{task.completedDate | date:'yyyy-MM-dd'}}
+                    </td>
+                    <td>{{task.level}}</td>
+                    <td>{{task.comment}}</td>
+                </tr>
+                
+            </tbody>
+        </table>
+<a href="" ng-click="getCompletedTasks()">Refresh</a>

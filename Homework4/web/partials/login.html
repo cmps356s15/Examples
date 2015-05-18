@@ -1,0 +1,22 @@
+
+        
+        <section id="loginForm">
+            <h2>Login</h2>
+            <div class="message" ng-hide="message === null || message === undefined">
+            <a ng-click="clearAlert()" href="#" class="close" data-dismiss="alert">&times;</a>
+            {{message}}
+</div>
+            <div>
+                <form name="loginForm" ng-submit="login()">
+                    <p>
+                        <input ng-model="credentials.username" type="text" name="username" id="username" maxlength="15" minlength="2" placeholder="Username" required />
+                    </p>
+                    <p>
+                        <input ng-model="credentials.password" type="password" name="password" id="password" maxlength="10" minlength="3" placeholder="Password" required />
+                    </p>
+                    <input type="submit" value="Login">
+                    
+                </form>
+                <img ng-show="loading" height="25" src="/hifz/img/ajax-loader.gif" alt="Please wait...">
+            </div>
+        </section>

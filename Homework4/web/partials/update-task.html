@@ -1,0 +1,55 @@
+
+            <h2>Update Task</h2>
+            <form name="updateForm" ng-submit="updateTask()" id="updateForm"> 
+                
+                <label for="sura">Sura</label>
+                <!--More info about custom data attributes @ http://www.w3schools.com/tags/att_global_data.asp-->
+                <select ng-model="task.surah.id" name="sura" id="sura" required>
+                    <option value=""></option>
+                    <option  ng-repeat="surah in surahs" value="{{surah.id}}" data-ayaCount="{{surah.ayaCount}}"
+                            ng-selected="surah.id === task.surah.id"> 
+                            {{surah.id}}. {{surah.englishName}} ({{surah.ayaCount}} Aya)
+                        </option>
+                    
+                </select>
+                <br />
+
+                <div class="range-selector">
+                    <label for="fromAya">From Aya: 
+                        <output id="selectedFromAya" for="fromAya">{{task.fromAya}}</output>
+                    </label>
+                    <input ng-change="onFromAyaChange()" type="range" id="fromAya" name="fromAya" ng-model="task.fromAya"
+                           min="1" max="{{task.surah.ayaCount}}" value="{{task.fromAya}}"
+                           oninput="selectedFromAya.value = fromAya.value;">
+                    <span id="fromMaxAya">{{task.surah.ayaCount}}</span>
+                </div>
+
+                <div class="range-selector">
+                    <label for="toAya">To Aya: 
+                        <output id="selectedToAya" for="toAya">{{task.toAya}}</output>
+                    </label>
+                    <input ng-model="task.toAya" type="range" id="toAya" name="toAya"
+                           min="1" max="{{task.surah.ayaCount}}" value="{{task.toAya}}"
+                           oninput="selectedToAya.value = toAya.value;" >
+                    <span id="toMaxAya">{{task.surah.ayaCount}}</span>
+                </div>
+                <br>
+
+                
+                <label for="dueDate">Due Date</label>
+                <input ng-model="task.dueDate" id="dueDate" name="dueDate" type="date" value="{{task.dueDate | date:'yyyy-MM-dd'}}" required/>
+
+                <label>Task Type</label>
+                <label>
+                    <input ng-model="task.type" type="radio" id="memorization" name="type" value="Memorization" 
+                           ng-checked="task.type === 'Memorization'" required> Memorization
+                </label>
+
+                <label>
+                    <input ng-model="task.type" type="radio" id="revision" name="type" value="Revision" 
+                           ng-checked="task.type === 'Revision'" required> Revision
+                </label>
+                <br />
+                <input type="submit" value="Submit" id="submit" >
+            </form>
+    
