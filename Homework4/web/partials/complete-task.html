@@ -1,51 +1,47 @@
+<h2>Complete Task</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Sura</th>
+            <th>Ayats</th>
+            <th>Due Date</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{task.surah.name}} - {{task.surah.englishName}}</td>
+            <td>{{task.fromAya}} to {{task.toAya}}</td>
+            <td>{{task.dueDate| asDate | date:'dd/MM/yyyy'}}</td>
+            <td>{{task.type}}</td>
+        </tr>
+    </tbody>
+</table>
+<br />
 
-            <h2>Complete Task</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Sura</th>
-                        <th>Ayats</th>
-                        <th>Due Date</th>
-                        <th>Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{task.surah.name}} - {{task.surah.englishName}}</td>
-                        <td>{{task.fromAya}} to {{task.toAya}}</td>
-                        <td>{{task.dueDate | date:'yyyy-MM-dd'}}</td>
-                        <td>{{task.type}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br />
+<form name="completeForm" ng-submit="completeTask()">
 
-            <form name="completeForm" ng-submit="completeTask()">
-                
-                <label for="">Hifz level</label>
-                <label>
-                    <input type="radio" name="level" ng-model="task.level" value="Excellent"> Excellent
-                </label>
-                <label>
-                    <input type="radio" name="level" ng-model="task.level" value="Ok"> Ok
-                </label>
-                <label>
-                    <input type="radio" name="level" ng-model="task.level" value="Poor" required> Poor
-                </label>
-                <br />
-                <!--{{task.dueDate}}-->
-                  
-                
-                <label>Completed date
-                    <input id="completedDate"
-                           ng-model="task.completedDate"
-                           name="completedDate"
-                           data-dueDate="{{task.dueDate }}"
-                           type="date" required />
-                </label>
-                <label>Comments
-                    <textarea id="comment" ng-model="task.comment" name="comment"></textarea>
-                </label>
-                <input type="submit" value="Submit">
-            </form>
-    
+    <label>Hifz level</label>
+    <label>
+        <input type="radio" name="level" ng-model="task.level" value="Excellent"> Excellent
+    </label>
+    <label>
+        <input type="radio" name="level" ng-model="task.level" value="Ok"> Ok
+    </label>
+    <label>
+        <input type="radio" name="level" ng-model="task.level" value="Poor" required> Poor
+    </label>
+    <br />
+
+    <label>Completed date
+        <input id="completedDate"
+               ng-model="task.completedDate"
+               name="completedDate"
+               type="date" required 
+               ng-change="onCompletedDateChange(task.completedDate, task.dueDate)"/>
+    </label>
+    <label>Comments
+        <textarea id="comment" ng-model="task.comment" name="comment"></textarea>
+    </label>
+    <input type="submit" value="Submit">
+</form>

@@ -1,7 +1,5 @@
 package hifzTracker.entity;
 
-import java.util.Date;
-
 public class Task {
     private int id;
     private Surah surah;
@@ -13,8 +11,9 @@ public class Task {
     private String level;
     private String comment;
 
-    public Task() {}
-    
+    public Task() {
+    }
+
     public Task(Surah surah, int fromAya, int toAya, String taskType, String dueDate) {
         this.surah = surah;
         this.fromAya = fromAya;

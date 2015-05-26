@@ -2,7 +2,7 @@
 
 <h2>Pending Tasks</h2>
 <div class="message" ng-hide="alertMessage === null || alertMessage === undefined">
-    <a ng-click="clearAlert()" href="#" class="close" data-dismiss="alert">&times;</a>
+    <a ng-click="clearAlert()" class="close">&times;</a>
     {{alertMessage}}
 </div>
 <img ng-show="loading" height="25" src="/hifz/img/ajax-loader.gif" alt="Please wait...">
@@ -21,13 +21,11 @@
         <tr ng-repeat="task in tasks">
             <td>{{task.surah.name}} - {{task.surah.englishName}}</td>
             <td>{{task.fromAya}} to {{task.toAya}}</td>
-            <td>{{task.dueDate | date:'yyyy/MM/dd'}}</td>
+            <td>{{task.dueDate | asDate | date:'dd/MM/yyyy'}}</td>
             <td>{{task.type}}</td>
             <td><a href="/hifz/#/update/{{task.id}}">Update</a></td>
             <td><a href="/hifz/#/complete/{{task.id}}" >Complete</a></td>
-            <td><a href="#" ng-click="deletePendingTask(task.id)">Delete</a></td>
+            <td><a href="#" ng-click="deleteTask(task.id)">Delete</a></td>
         </tr>
-        
     </tbody>
 </table>
-<a href="" ng-click="getPendingTasks()">Refresh</a>

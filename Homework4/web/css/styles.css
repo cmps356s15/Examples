@@ -35,12 +35,12 @@ label {
 
 input[type='text'], input[type='date'], input[type='password'], input[type='range'], select {
     margin-bottom: 10px;
-    width: 200px;
+    width: 220px;
 }
 
 input[type='date'] {
     margin-bottom: 10px;
-    width: 120px;
+    width: 160px;
 }
 
 textarea {

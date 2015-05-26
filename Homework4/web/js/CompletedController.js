@@ -1,45 +1,22 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-angular.module('myApp').controller('CompletedController', function($rootScope, $scope, $http, $location) {
-   
- console.log("I am in completed!");
+angular.module('hifzApp').controller('CompletedController', function($rootScope, $scope, $http, $location) {
 
     $scope.getCompletedTasks = function() {
-          console.log("I am in completed!");
+        var userId = $rootScope.getLoggedInUserId();
         $scope.alertMessage = null; //clear alertMessage
         var request = $http({
             method: 'GET',
             dataType: "json",
-            url: '/hifz/api/task/' + $rootScope.loggedInUser.id + '/completed'
+            url: '/hifz/api/tasks/' + userId + '/completed'
         });
         
         request.success(function(response) {
-            console.log("I am in completed!");
-            console.log(response);
             $scope.tasks = response;
-           // $scope.loading = false;
         });
         
-        request.error(function(response, status, headers, config) {
-            //$scope.alertMessage = response;
-            console.log(response, status, config);
-            //$scope.loading = false;
+        request.error(function () {
+            alert('Submitting task failed');
         });
     };
 
-    //Call the getContacts to initialiaze the contacts array
-  
-    console.log("YOU HERE?!!!");
-    $scope.getCompletedTasks();
-
-    $scope.clearAlert = function() {
-        $scope.alertMessage = null;
-    };
-    
-    
+    $scope.getCompletedTasks();  
 });

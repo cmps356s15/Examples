@@ -72,7 +72,7 @@ public class UserRepository {
 
         User[] userArray = gson.fromJson(usersStr, User[].class);
         users = new ArrayList<>(Arrays.asList(userArray));
-        lastUserId = users.size();
+        lastUserId = users.size() + 1;
 
         System.out.println("lastUserId : " + lastUserId);
     }

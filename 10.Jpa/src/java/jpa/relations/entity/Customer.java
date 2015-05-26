@@ -18,9 +18,8 @@ import java.util.ArrayList;
             + "Group by C.name")
 })
 
-@Entity
+@Entity 
 public class Customer implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

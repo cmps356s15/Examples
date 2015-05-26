@@ -1,94 +1,57 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-myApp.controller('PendingController', function($rootScope, $scope, $http, $location) {
-   
-   var deletePendingTask = function(taskID) {
-        var foundAt = $scope.tasks.indexOf('id', taskID);
-        if (taskID >= 0) {
-            $scope.tasks.splice(foundAt, 1);
-        };
-        $location.path("/");
-    };
-   
-    Array.prototype.indexOf = function (property, value) {
-        for (var i = 0; i < this.length; i++) {
-            if (this[i][property] === value)
-                return i;
-        }
-        return -1;
-    };
-
-    $scope.getPendingTasks = function() {
+hifzApp.controller('PendingController', function ($rootScope, $scope, $http, $location) {
+    
+    $scope.getPendingTasks = function () {
+        var userId = $rootScope.getLoggedInUserId();
         $scope.loading = true;
-        $scope.alertMessage = null; //clear alertMessage
+        $rootScope.alertMessage = null; //clear alertMessage
         var request = $http({
             method: 'GET',
             dataType: "json",
-            url: '/hifz/api/task/' + $rootScope.loggedInUser.id + '/pending'
+            url: '/hifz/api/tasks/' + userId + '/pending'
         });
-        
-        request.success(function(response) {
-            console.log(response);
-            console.log("Type of Date: " + typeof response[0].dueDate);
-            $scope.tasks = response;
+
+        request.success(function (response) {
+            $rootScope.tasks = response;
             $scope.loading = false;
         });
-        
-        request.error(function(response, status, headers, config) {
-            $scope.alertMessage = response;
+
+        request.error(function (response, status, headers, config) {
+            $rootScope.alertMessage = response;
             console.log(response, status, config);
             $scope.loading = false;
         });
     };
-
-    //Call the getContacts to initialiaze the contacts array
-  
-       
     
-    if(!typeof $rootScope.loggedInUser === 'undefined'){
-   // your code here.
-   
+    if (angular.isUndefined($rootScope.tasks)) {
         $scope.getPendingTasks();
-     };
-     
-     $scope.$on('loginEvent', function(event, args) {
-         $scope.getPendingTasks();
-     });
+    }
     
-    $scope.deletePendingTask = function(taskID) {
-        console.log('ContactId to delete ' + taskID);
-        if (!confirm("Are you sure you want to delete contact# " + taskID + "?")) {
-            $location.path("/");
+    var deleteTask = function (taskId) {
+        var foundAt = $rootScope.tasks.indexOf('id', taskId);
+        if (taskId >= 0) {
+            $rootScope.tasks.splice(foundAt, 1);
+        };
+        $location.path("/");
+    };
+
+    $scope.deleteTask = function (taskId) {
+        console.log('TaskId to delete ' + taskId);
+        if (!confirm("Are you sure you want to delete task# " + taskId + "?")) {
             return;
         }
+        var userId = $rootScope.getLoggedInUserId();
         console.log($rootScope.loggedInUser);
         $http({
-            method: 'DELETE',
-            url: '/hifz/api/task/' + $rootScope.loggedInUser.id + '/' + taskID 
-        }).success(function(response) {
+            method: 'delete',
+            url: '/hifz/api/tasks/' + userId + '/' + taskId
+        }).success(function (response) {
             console.log(response);
-            $scope.alertMessage = response;
-            //Delete the contact on the client side
-            deletePendingTask(taskID);
+            $rootScope.alertMessage = response;
+            deleteTask(taskId);
             $scope.loading = false;
-        }).error(function(response, status, headers, config) {
-            $scope.alertMessage = response;
-            console.log(response, status, config);
+        }).error(function (response) {
+            $rootScope.alertMessage = response;
             $scope.loading = false;
         });
-    };
-
-    $scope.clearAlert = function() {
-        $scope.alertMessage = null;
-    };
-    
-    $scope.logout = function() {
-        delete $rootScope.loggedInUser;
-        $location.path("/login");
     };
 });

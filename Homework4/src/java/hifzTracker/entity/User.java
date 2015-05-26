@@ -22,7 +22,7 @@ public class User {
         this.password = password;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -47,7 +47,7 @@ public class User {
     }
     
     public String getFullName() {
-        return firstName+" " +lastName;
+        return firstName + " " + lastName;
     }
 
     public String getPhone() {
@@ -89,5 +89,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    
 }

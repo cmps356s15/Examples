@@ -1,6 +1,5 @@
 package hifzTracker.repository;
 
-import com.google.gson.Gson;
 import hifzTracker.entity.Task;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -95,15 +94,15 @@ public class TaskRepository {
         int upperBound = +5;
         int numberOfAya = 4;
         String[] taskType = {"Memorization", "Revision"};
-        
+
         for (int i = 1; i <= 10; i++) {
             int randomInt = random.nextInt(upperBound - lowerBound) + lowerBound;
             Calendar c = Calendar.getInstance();
-           
+
             c.setTime(new Date()); // Now use today date.
             c.add(Calendar.DATE, randomInt); // Adding 5 days
             Date dueDate = c.getTime();
-            
+
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
             Task task = new Task(surahRepository.getSurah(i), 1, numberOfAya, taskType[i % 2], df.format(dueDate));
             numberOfAya += i % 2;
