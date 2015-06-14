@@ -20,6 +20,10 @@ public class InternshipRepository {
     private int lastInternshipId = 0;
 
     public Internship getInternship(int studentId) {
+        if (internships == null || internships.isEmpty()) {
+            insertTestData();
+        }
+                
         Optional<Internship> internship = internships.stream().filter(i -> i.getStudent().getStudentId() == studentId).findFirst();
         return internship.isPresent() ? internship.get() : null;
     }

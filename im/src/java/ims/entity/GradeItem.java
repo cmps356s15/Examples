@@ -2,8 +2,11 @@ package ims.entity;
 
 import ims.repository.Utils;
 
-public class 
-
+public class GradeItem {
+    private Criteria criteria;
+    private Rating rating;
+    private String comment;
+    
     public GradeItem() {
     }
 
