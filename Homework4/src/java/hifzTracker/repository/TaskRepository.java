@@ -3,89 +3,86 @@ package hifzTracker.repository;
 import hifzTracker.entity.Task;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.stream.Collectors;
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
-@Singleton
+@Stateless
 public class TaskRepository {
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Inject
     SurahRepository surahRepository;
 
-    private Map<Integer, List<Task>> tasks = new HashMap<>();
-    private int lastTaskId = 1;
+    @Inject
+    UserRepository userRepository;
 
-    public TaskRepository() {
-    }
-
-    public int addTask(Integer userId, Task task) {
-
-        List<Task> userTasks = tasks.get(userId);
-        if (userTasks == null) {
-            userTasks = new ArrayList();
-        }
-        task.setId(lastTaskId++);
-        userTasks.add(task);
-        tasks.put(userId, userTasks);
+    public int addTask(Task task) {
+        em.persist(task);
+        em.flush(); //Force saving to the database to generate a taskId
         return task.getId();
     }
 
-    public void deleteTask(Integer userId, int taskId) {
-        List<Task> userTasks = tasks.get(userId);
-        userTasks.removeIf(c -> c.getId() == taskId);
+    public void deleteTask(int taskId) {
+        Task task = em.getReference(Task.class, taskId);
+        em.remove(task);
     }
 
-    public void completeTask(Integer userId, int taskId, String completedDate, String level, String comment) {
-        List<Task> userTasks = tasks.get(userId);
-        //TODO validate task ID
-        Task task = userTasks.stream().filter(c -> c.getId() == taskId).findFirst().get();
+    public void completeTask(int taskId, String completedDate, String level, String comment) {
+        Task task = getTask(taskId);
         task.setCompletedDate(completedDate);
         task.setLevel(level);
         task.setComment(comment);
+        updateTask(task);
     }
 
-    public List<Task> getCompletedTasks(Integer userId) {
-        List<Task> userTasks = tasks.get(userId);
-
-        List<Task> completedTasks = userTasks.stream().filter(c -> c.isCompleted()).collect(Collectors.toList());
-        return completedTasks;
+    public Task getTask(int taskId) {
+        return em.find(Task.class, taskId);
     }
 
-    public List<Task> getPendingTasks(Integer userId) {
-        List<Task> userTasks = tasks.get(userId);
+    public void updateTask(Task task) {
+        em.merge(task);
+    }
 
-        //Insert test data
-        if (userTasks == null) {
+    public List<Task> gettasksByuserId(int userId) {
+        Query query = em.createNamedQuery("Task.getTasksByUserId");
+        query.setParameter("userId", userId);
+        List<Task> tasks = query.getResultList();
+        if (tasks == null || tasks.isEmpty()) {
             insertTestTasks(userId);
+            tasks = query.getResultList();
         }
-
-        List<Task> pendingTasks = tasks.get(userId).stream().filter(c -> !c.isCompleted()).collect(Collectors.toList());
-        return pendingTasks;
+        return tasks;
     }
 
-    public Task getTask(Integer userId, int taskId) {
-        Task task = tasks.get(userId).stream().filter(c -> c.getId() == taskId).findFirst().get();
-        return task;
+    public List<Task> getCompletedTasks(int userId) {
+        Query query = em.createQuery("select t FROM Task t WHERE t.user.id = :userId and t.completedDate is not null");
+        query.setParameter("userId", userId);
+        List<Task> tasks = query.getResultList();
+        if (tasks == null || tasks.isEmpty()) {
+            insertTestTasks(userId);
+            tasks = query.getResultList();
+        }
+        return tasks;
     }
 
-    public void updateTask(Integer userId, Task task) {
-
-        List<Task> userTasks = tasks.get(userId);
-
-        for (int i = 0; i < userTasks.size(); i++) {
-            if (userTasks.get(i).getId() == task.getId()) {
-                userTasks.set(i, task);
-                break;
-            }
+    public List<Task> getPendingTasks(int userId) {
+        Query query = em.createQuery("select t FROM Task t WHERE t.user.id = :userId and t.completedDate is null");
+        query.setParameter("userId", userId);
+        List<Task> tasks = query.getResultList();
+        if (tasks == null || tasks.isEmpty()) {
+            insertTestTasks(userId);
+            tasks = query.getResultList();
         }
+        return tasks;
     }
 
     private void insertTestTasks(Integer userId) {
@@ -105,8 +102,10 @@ public class TaskRepository {
 
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
             Task task = new Task(surahRepository.getSurah(i), 1, numberOfAya, taskType[i % 2], df.format(dueDate));
+            task.setUser(userRepository.getUser(userId));
             numberOfAya += i % 2;
-            this.addTask(userId, task);
+            this.addTask(task);
         }
     }
+
 }

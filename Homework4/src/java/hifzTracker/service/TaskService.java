@@ -2,7 +2,9 @@ package hifzTracker.service;
 
 import com.google.gson.Gson;
 import hifzTracker.entity.Task;
+import hifzTracker.entity.User;
 import hifzTracker.repository.TaskRepository;
+import hifzTracker.repository.UserRepository;
 import java.net.URI;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -25,6 +27,9 @@ public class TaskService {
     @Inject
     TaskRepository taskRepository;
 
+    @Inject
+    UserRepository userRepository;
+
     @GET
     @Path("{userId}/pending")
     @Produces(MediaType.APPLICATION_JSON)
@@ -40,7 +45,7 @@ public class TaskService {
     @Path("{userId}/{taskId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTask(@PathParam("userId") int userId, @PathParam("taskId") int taskId) {
-        Task task = taskRepository.getTask(userId, taskId);
+        Task task = taskRepository.getTask(taskId);
         return Response.ok(task).build();
     }
 
@@ -59,7 +64,7 @@ public class TaskService {
     @Path("/{userId}/complete")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response completeTask(@PathParam("userId") int userId, Task task) {
-        taskRepository.completeTask(userId, task.getId(), task.getCompletedDate(), task.getLevel(), task.getComment());
+        taskRepository.completeTask(task.getId(), task.getCompletedDate(), task.getLevel(), task.getComment());
         System.out.println("User Id: " + userId);
         return Response.ok().build();
     }
@@ -67,7 +72,7 @@ public class TaskService {
     @DELETE
     @Path("/{userId}/{taskId}")
     public Response deleteTask(@PathParam("userId") int userId, @PathParam("taskId") int taskId) {
-        taskRepository.deleteTask(userId, taskId);
+        taskRepository.deleteTask(taskId);
         return Response.ok(String.format("Task #%d deleted", taskId)).build();
     }
 
@@ -76,7 +81,9 @@ public class TaskService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addTask(@PathParam("userId") int userId, Task task) {
         try {
-            int taskId = taskRepository.addTask(userId, task);
+            User user = userRepository.getUser(userId);
+            task.setUser(user);
+            int taskId = taskRepository.addTask(task);
             String location = String.format("/hifz/api/tasks/%s/%s", userId, taskId);
             return Response.created(new URI(location)).build();
         } catch (Exception ex) {
@@ -91,7 +98,9 @@ public class TaskService {
     @Path("/{userId}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateTask(@PathParam("userId") int userId, Task task) {
-        taskRepository.updateTask(userId, task);
+        User user = userRepository.getUser(userId);
+        task.setUser(user);
+        taskRepository.updateTask(task);
         System.err.println("UserId: " + userId);
         return Response.ok().build();
     }

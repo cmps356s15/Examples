@@ -37,9 +37,11 @@ hifzApp.controller('TaskController', function ($scope, $routeParams, $http, $roo
                 console.log("TaskId: " + taskId);
                 $scope.task.id = parseInt(taskId);
                 $rootScope.tasks.push($scope.task);
+                $rootScope.alertMessage = 'Task with Id #' + $scope.task.id + ' has been added!';
             }
-
-            $rootScope.alertMessage = 'Task with Id #' + $scope.task.id + ' has been added!';
+            else {
+                $rootScope.alertMessage = 'Task with Id #' + $scope.task.id + ' has been updated!';
+            }
             $scope.loading = false;
             $location.path("/");
         }).error(function () {

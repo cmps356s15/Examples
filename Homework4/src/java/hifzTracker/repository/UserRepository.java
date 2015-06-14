@@ -5,75 +5,69 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import hifzTracker.entity.User;
-import javax.ejb.Singleton;
-import java.util.Optional;
+import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
-@Singleton
+@Stateless
 public class UserRepository {
 
-    private List<User> users;
-    private int lastUserId = 0;
-    private final String usersUrl = "http://erradi.github.io/users.js";
+    @PersistenceContext
+    private EntityManager em;
 
     public List<User> getUsers() {
-        loadUsers();
-        return users;
+        Query query = em.createQuery("select u from User as u");
+        return query.getResultList();
     }
 
     public User addUser(User user) {
-        if (users == null) {
-            users = new ArrayList();
-        }
-        users.add(user);
-        user.setId(++lastUserId);
+        em.persist(user);
         return user;
     }
 
     public void updateUser(User user) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getId() == user.getId()) {
-                users.set(i, user);
-                break;
-            }
-        }
+        em.merge(user);
     }
 
     public void deleteUser(int userId) {
-        users.removeIf(c -> c.getId() == userId);
+        User user = em.getReference(User.class, userId);
+        em.remove(user);
     }
 
     public User getUser(int id) {
-        return users.stream().filter(c -> c.getId() == id).findFirst().get();
-    }
-
-    public int getUsersCount() {
-        return users == null ? 0 : users.size();
+        return em.find(User.class, id);
     }
 
     public User getUser(String username, String password) {
-        System.out.println("username : " + username);
-        System.out.println("password : " + password);
-        //System.out.println(users);
-        if (users == null) {
-            loadUsers();
-        }
-        Optional<User> user = users.stream().filter(c -> c.getUsername().equals(username) && c.getPassword().equals(password)).findFirst();
-        return user.isPresent() ? user.get() : null;
+        Query query = em.createQuery("select u from User u where u.username = :username and u.password = :password");
+        query.setParameter("username", username);
+        query.setParameter("password", password);
+        return (User) query.getSingleResult();
+    }
+    
+    public void update(User user) {
+        em.merge(user);
     }
 
+    //@PostConstruct = This method will be auto-executed after the object is instantiated 
+    @PostConstruct
     private void loadUsers() {
-        if (users != null && users.size() > 0) {
+        //Only load users to the database and the Users table is empty
+        int usersCount = ((Long) em.createQuery("select count(u.id) from User as u").getSingleResult()).intValue();
+        if (usersCount > 0)
             return;
-        }
 
+        String usersUrl = "http://erradi.github.io/users.js";
         Gson gson = new Gson();
         String usersStr = Utils.readUrl(usersUrl);
         System.out.println(usersStr);
 
         User[] userArray = gson.fromJson(usersStr, User[].class);
-        users = new ArrayList<>(Arrays.asList(userArray));
-        lastUserId = users.size() + 1;
-
-        System.out.println("lastUserId : " + lastUserId);
+        List<User> users = new ArrayList<>(Arrays.asList(userArray));
+        users.forEach(
+                user -> addUser(user)
+        );
     }
 }

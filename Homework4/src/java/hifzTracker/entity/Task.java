@@ -1,7 +1,26 @@
 package hifzTracker.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+@Entity
+@NamedQueries({
+    @NamedQuery(name = "Task.getTasksByUserId",
+            query = "select t FROM Task t WHERE t.user.id = :userId")})
 public class Task {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "SurahId")
     private Surah surah;
     private int fromAya;
     private int toAya;
@@ -10,6 +29,9 @@ public class Task {
     private String completedDate;
     private String level;
     private String comment;
+    @ManyToOne
+    @JoinColumn(name = "UserId")
+    private User user;
 
     public Task() {
     }
@@ -96,5 +118,13 @@ public class Task {
 
     public boolean isCompleted() {
         return completedDate != null;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

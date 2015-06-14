@@ -1,7 +1,12 @@
 package hifzTracker.entity;
 
-public class Surah {
-    private int id;
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Surah implements Serializable {
+    @Id private int id;
     private String name;
     private String englishName;
     private int ayaCount;
