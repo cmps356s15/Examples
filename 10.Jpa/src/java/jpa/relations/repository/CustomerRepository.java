@@ -120,6 +120,10 @@ public class CustomerRepository implements ICustomerRepository {
             String SQL = "Select C.NAME CustomerName, SUM(O.Qty) TotalQty from CUSTOMER C"
                     + " join ORDERS O on C.ID = O.CUSTOMER_ID"
                     + " Group by C.NAME";
+            
+            Query query = em.createNativeQuery(SQL);
+            query.getResultList();
+            em.close();
 
             ResultSet rs = stmt.executeQuery(SQL);
 
