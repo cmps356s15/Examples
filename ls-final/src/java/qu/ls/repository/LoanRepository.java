@@ -9,19 +9,22 @@ import qu.ls.entity.Loan;
 
 @Singleton
 public class LoanRepository {
+
     private List<Book> books;
     private List<Borrower> borrowers;
     private List<Loan> loans;
 
     public LoanRepository() {
-        insertTestData();
     }
 
     public void addLoan(String bookIsbn, int borrowerId) {
-        //ToDo implement addLoan
+        Loan loan = new Loan(getBorrower(borrowerId), getBook(bookIsbn));
+        loan.setId(loans.size() + 1);
+        loans.add(loan);
     }
 
     public List<Loan> getLoans() {
+        insertTestData();
         return loans;
     }
 
@@ -40,8 +43,12 @@ public class LoanRepository {
     public Borrower getBorrower(int id) {
         return borrowers.stream().filter(c -> c.getId() == id).findFirst().get();
     }
-        
+
     private void insertTestData() {
+        if (loans != null && loans.size() > 0) {
+            return;
+        }
+        
         loans = new ArrayList<>();
 
         //Insert 3 books
@@ -58,7 +65,7 @@ public class LoanRepository {
 
         //Insert 2 loans for the 3rd Borrower borrowing the first 2 books
         loans = new ArrayList<>();
-        loans.add(new Loan(borrowers.get(2), books.get(0)));
-        loans.add(new Loan(borrowers.get(2), books.get(1)));
+        addLoan("123", 1);
+        addLoan("234", 2);
     }
 }

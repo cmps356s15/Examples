@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Loan {
+    //This should be auto-assigned by the Database
+    int id;
     private Borrower borrower;
     private Book book;
     
@@ -16,6 +18,14 @@ public class Loan {
         this.borrower = borrower;
         this.book = book;
         setDefaultDueDate();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Book getBook() {
